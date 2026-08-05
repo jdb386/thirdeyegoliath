@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third Eye Goliath — Collections</title>
+<style>
+  :root { --neon-pink:#ff2e88; --neon-green:#7ed321; --bg-black:#060608; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg-black) url('assets/background.png') no-repeat center top;
+    background-size: cover;
+    font-family:'Arial Black', Impact, sans-serif;
+    color:#fff; min-height:100vh;
+  }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; }
+  nav ul { display:flex; gap:30px; list-style:none; font-size:14px; letter-spacing:1px; }
+  nav a { color:#fff; text-decoration:none; }
+  nav a.active { color:var(--neon-pink); border-bottom:2px solid var(--neon-pink); padding-bottom:4px; }
+  .layout { display:flex; gap:30px; padding:20px 40px 60px; max-width:1500px; margin:0 auto; }
+  .sidebar { flex:0 0 200px; }
+  .sidebar h3 { color:var(--neon-pink); font-size:16px; letter-spacing:1px; margin-bottom:14px; }
+  .sidebar a {
+    display:block; color:#ccc; text-decoration:none; font-family:Arial, sans-serif;
+    font-size:14px; padding:9px 12px; border-left:3px solid transparent; transition:all .15s;
+  }
+  .sidebar a:hover { color:var(--neon-green); border-left-color:var(--neon-green); background:rgba(255,255,255,0.04); }
+  .sidebar a.current { color:var(--neon-pink); border-left-color:var(--neon-pink); background:rgba(255,46,136,0.08); }
+  .content { flex:1; }
+  .content h2 { color:var(--neon-pink); letter-spacing:2px; margin-bottom:8px; }
+  .content .sub { font-family:Arial, sans-serif; font-weight:normal; color:#999; font-size:14px; margin-bottom:26px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:16px; }
+  .grid img {
+    width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;
+    border:1px solid rgba(255,255,255,0.1); cursor:pointer; transition:transform .15s, border-color .15s;
+  }
+  .grid img:hover { transform:scale(1.03); border-color:var(--neon-pink); }
+  #lightbox {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.93);
+    z-index:999; justify-content:center; align-items:center; padding:40px;
+  }
+  #lightbox.open { display:flex; }
+  #lightbox img { max-width:95%; max-height:95%; object-fit:contain; border-radius:6px; }
+  #lightbox .close {
+    position:absolute; top:20px; right:34px; font-size:44px; color:#fff;
+    cursor:pointer; line-height:1; user-select:none;
+  }
+  #lightbox .close:hover { color:var(--neon-pink); }
+  @media (max-width:760px) {
+    .layout { flex-direction:column; padding:20px; }
+    .sidebar { flex:none; }
+    .sidebar a { display:inline-block; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><img src="assets/logo-small.png" alt="Third Eye Goliath" style="height:55px;"></a>
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="index.html">ABOUT</a></li>
+    <li><a href="index.html">SHOP</a></li>
+    <li><a href="collections.html" class="active">COLLECTIONS</a></li>
+    <li><a href="index.html">CONTACT</a></li>
+  </ul>
+  <img src="assets/icon-instagram.png" alt="Instagram" style="height:24px;">
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h3>CATEGORIES</h3>
+    <a href="collections.html" class="current" data-cat="featured">Featured</a>
+    <a href="#" data-cat="zombiebro">Zombie Bro</a>
+    <a href="#" data-cat="skeletons">Skeletons</a>
+    <a href="#" data-cat="spacealien">Space Alien</a>
+    <a href="#" data-cat="death">Death</a>
+    <a href="#" data-cat="sugarskulls">Sugar Skulls</a>
+    <a href="#" data-cat="medusa">Medusa</a>
+    <a href="#" data-cat="wizard">Wizard</a>
+    <a href="#" data-cat="goblins">Goblins</a>
+    <a href="#" data-cat="vampire">Vampire</a>
+    <a href="#" data-cat="plants">Carnivorous Plants</a>
+    <a href="#" data-cat="dtltg">DTLTG</a>
+    <a href="#" data-cat="fuwa">Fuwa Fuwa</a>
+    <a href="#" data-cat="stickers">Stickers</a>
+  </aside>
+
+  <main class="content">
+    <h2 id="catTitle">FEATURED</h2>
+    <p class="sub" id="catSub">A selection from across the collections — pick a category on the left to see more.</p>
+    <div class="grid" id="gallery"></div>
+  </main>
+</div>
+
+<div id="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+const catalog = {
+  featured: { title:"FEATURED", sub:"A selection from across the collections — pick a category on the left to see more.", images:[
+    "skeletons__higherbat.png","skeletons__ridingthelightning.png","skeletons__skeleton-astronaut-sitting-on-a-crescent-moon-smoking.png",
+    "skeletons__sullonmoon.png","skeletons__weednskullmush.png","medusa__medusa.png",
+    "spacealien__aliengirl-poster.png","spacealien__aliengreenhouse.png","spacealien__aliengreenhouseamericana.png",
+    "spacealien__alienhitchhiker.png","spacealien__galatcigreetings.png","spacealien__moonbootsactivatedblunt.png",
+    "spacealien__moonbootsactivatedweed.png","spacealien__moonbootslollypop1.jpg","spacealien__pinupalien3.png",
+    "spacealien__spacepin1.png","stickers__sugarbus.png"
+  ]},
+  zombiebro: { title:"ZOMBIE BRO", sub:"", images:[
+    "zombiebro__adamzombeislayer.png","zombiebro__borntorotzombiebro.png","zombiebro__deadinside-stillvibingzombiebor.png",
+    "zombiebro__galaticzombiebroburger.png","zombiebro__notawakezombiebro.png","zombiebro__zombiebro6diff.png",
+    "zombiebro__zombiebrobear.png","zombiebro__zombiebrocantsillwhatsalreadydead.png","zombiebro__zombiebrodeadinsidegoodvibes.png",
+    "zombiebro__zombiebrolifeafter.png","zombiebro__zombiebromonday.png","zombiebro__zombiebronotawake-notdead.png"
+  ]},
+  skeletons: { title:"SKELETONS", sub:"", images:[
+    "skeletons__higherbat.png","skeletons__ridingthelightning.png","skeletons__skeleton-astronaut-sitting-on-a-crescent-moon-smoking.png",
+    "skeletons__sullonmoon.png","skeletons__weednskullmush.png"
+  ]},
+  spacealien: { title:"SPACE ALIEN", sub:"", images:[
+    "spacealien__aliengirl-poster.png","spacealien__aliengreenhouse.png","spacealien__aliengreenhouseamericana.png",
+    "spacealien__alienhitchhiker.png","spacealien__galatcigreetings.png","spacealien__moonbootsactivatedblunt.png",
+    "spacealien__moonbootsactivatedweed.png","spacealien__moonbootslollypop1.jpg","spacealien__pinupalien3.png","spacealien__spacepin1.png"
+  ]},
+  death: { title:"DEATH", sub:"", images:[
+    "death__deahtcircle1.jpg","death__deahtcircle2.jpg","death__deathchina1.png",
+    "death__deathchina2.png","death__deathchina3.png","death__deathpurple.jpg"
+  ]},
+  sugarskulls: { title:"SUGAR SKULLS", sub:"", images:[
+    "sugarskulls__goldsugarskullqueen.jpg","sugarskulls__silversugarskullqueen.png"
+  ]},
+  medusa: { title:"MEDUSA", sub:"", images:["medusa__medusa.png"]},
+  wizard: { title:"WIZARD", sub:"", images:["wizard__dirtyman.png","wizard__wizardhigh.png"]},
+  goblins: { title:"GOBLINS", sub:"", images:["goblins__gobblinforfood.png","goblins__gobblininbeer.png"]},
+  vampire: { title:"VAMPIRE", sub:"", images:["vampire__vampirethc.png"]},
+  plants: { title:"CARNIVOROUS PLANTS", sub:"", images:["plants__venusflytrap.png"]},
+  dtltg: { title:"DTLTG", sub:"", images:["dtltg__dtltg1.png","dtltg__dtltg13.png","dtltg__dtltg2.png"]},
+  fuwa: { title:"FUWA FUWA", sub:"", images:[
+    "fuwa__fuwa-fuwa-1.png","fuwa__fuwa-fuwa-2.jpg","fuwa__fuwa-fuwa-3.png",
+    "fuwa__fuwa-fuwa-4.png","fuwa__fuwa-fuwa-5.png","fuwa__fuwa-fuwa-6.png"
+  ]},
+  stickers: { title:"STICKERS", sub:"", images:[
+    "stickers__ailean.png","stickers__ailean2.png","stickers__ailean3.png","stickers__br.png",
+    "stickers__dapack.png","stickers__feed-me-1.png","stickers__feed-me.png","stickers__feedme3.png",
+    "stickers__file-000000003ed081fbb4c7011fee80de52.png","stickers__gemini-generated-image-xtikckxtikckxtik.png",
+    "stickers__moth.png","stickers__mysticcrow.png","stickers__mysticcrow1.png","stickers__mysticowl.png",
+    "stickers__pack1.png","stickers__pack2.png","stickers__pack3.png","stickers__pack4.png","stickers__pack5.png",
+    "stickers__pack6.png","stickers__pack7.png","stickers__pack8.png","stickers__pack9.png","stickers__pack11.png",
+    "stickers__pack12.png","stickers__pack13.png","stickers__pack14.png","stickers__pack15.png",
+    "stickers__skelehand.png","stickers__skull-mushrooms.png","stickers__sugarbus.png","stickers__venus-skull.png"
+  ]}
+};
+
+const gallery = document.getElementById("gallery");
+const catTitle = document.getElementById("catTitle");
+const catSub = document.getElementById("catSub");
+
+function render(cat) {
+  const data = catalog[cat];
+  if (!data) return;
+  catTitle.textContent = data.title;
+  catSub.textContent = data.sub;
+  catSub.style.display = data.sub ? "block" : "none";
+  gallery.innerHTML = "";
+  data.images.forEach(name => {
+    const img = document.createElement("img");
+    img.src = "assets/collections/" + name;
+    img.loading = "lazy";
+    img.alt = "";
+    img.addEventListener("click", () => openLightbox(img.src));
+    gallery.appendChild(img);
+  });
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+document.querySelectorAll(".sidebar a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    document.querySelectorAll(".sidebar a").forEach(l => l.classList.remove("current"));
+    link.classList.add("current");
+    render(link.dataset.cat);
+  });
+});
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add("open"); }
+function closeLightbox() { lightbox.classList.remove("open"); lightboxImg.src = ""; }
+document.querySelector("#lightbox .close").addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+render("featured");
+</script>
+
+</body>
+</html>
