@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third Eye Goliath — Collections</title>
+<style>
+  :root {
+    --neon-pink: #ff2e88;
+    --bg-black: #060608;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg-black) url('assets/background.png') no-repeat center top;
+    background-size: cover;
+    font-family: 'Arial Black', Impact, sans-serif;
+    color: #fff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 20px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+</style>
+</head>
+<body>
+
+<nav style="display:flex; justify-content:space-between; align-items:center; padding:20px 40px; position:relative; z-index:10;">
+  <a href="index.html"><img src="assets/logo.png" alt="Third Eye Goliath" style="height:55px;"></a>
+  <ul style="display:flex; gap:30px; list-style:none; font-size:14px; letter-spacing:1px;">
+    <li><a href="index.html" style="color:#fff; text-decoration:none;">HOME</a></li>
+    <li><a href="index.html#about" style="color:#fff; text-decoration:none;">ABOUT</a></li>
+    <li><a href="index.html#shop" style="color:#fff; text-decoration:none;">SHOP</a></li>
+    <li><a href="collections.html" style="color:var(--neon-pink); text-decoration:none; border-bottom:2px solid var(--neon-pink); padding-bottom:4px;">COLLECTIONS</a></li>
+    <li><a href="index.html#contact" style="color:#fff; text-decoration:none;">CONTACT</a></li>
+  </ul>
+  <img src="assets/icon-instagram.png" alt="Instagram" style="height:24px;">
+</nav>
+
+<h2 style="text-align:center; color:var(--neon-pink); letter-spacing:2px; margin:20px 0 40px;">COLLECTIONS</h2>
+
+<div class="grid" id="gallery"></div>
+
+<script>
+  const images = [
+    "1785360397871.png","1785783510126.png","adamgrave.png","adamgrave2.png",
+    "aliengirl-poster.png","aliengreenhouse.png","aliengreenhouseamericana.png","aliensugarskull.png",
+    "astrosucker.jpg","atfom.jpg","atfom1.jpg","bearsdont.png","btr.png","btr1.png",
+    "cantkill.png","chillin.png","dasticker.png","death.jpg","deathbackground.png",
+    "dirtyman.png","disb.png","divo.png","dtltg1.png","dtltg2.png","dtltg3.png",
+    "fuwa-fuwa_1.png","fuwa-fuwa_2.jpg","fuwa-fuwa_3.png","fuwa-fuwa_4.png","fuwa-fuwa_5.png","fuwa-fuwa_6.png",
+    "gal.jpg","galactic-greetings.png","gobblinforfood.png","gobblininbeer.png",
+    "higherbat.png","hitchhiker.png","jointcustody.jpg","lad.png","lantern.png",
+    "livingthedream.png","mb1.png","mb2.png","medusa.png","monday.png","nand.png","nand1.png",
+    "notawake-notdead.png","notawakenotdead.png","overratedbrains.png","removethehead.png",
+    "respondfailed.png","respondfailed1.png","respondfailed2.png","ridethelightning.png",
+    "sotm.png","sotm1.png","sotm2.png","spacegirlpinup1.png","spacepin1.png",
+    "sugarskull1.png","sugarskull2.jpg","toocool.png","vamp.png","venusflytrap.png","wizardhigh.png"
+  ];
+  const gallery = document.getElementById("gallery");
+  images.forEach(name => {
+    const img = document.createElement("img");
+    img.src = "assets/collections/" + name;
+    img.loading = "lazy";
+    gallery.appendChild(img);
+  });
+</script>
+
+</body>
+</html>
