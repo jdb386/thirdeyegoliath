@@ -28,6 +28,56 @@
   .decorative-splatter { position: absolute; width: 150px; opacity: 0.6; z-index: 0; }
   .section-divider { width: 100%; max-width: 500px; margin: 0 auto 15px; display: block; }
   .scratch-accent { width: 220px; display: block; margin: 10px auto; }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 768px) {
+    nav {
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      gap: 12px !important;
+      padding: 16px 12px !important;
+    }
+    nav ul {
+      gap: 14px !important;
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      font-size: 12px !important;
+      order: 3;
+      width: 100%;
+    }
+    nav img { height: 44px !important; }
+
+    section { padding: 20px 14px !important; gap: 20px !important; }
+
+    /* Hero images scale to screen */
+    section img[alt*="Wizard"] { max-width: 78% !important; }
+    section img[alt*="Third Eye Goliath"] { max-width: 90% !important; }
+    section img[alt*="Coming Soon"] { max-width: 72% !important; }
+    .scratch-accent { width: 60% !important; }
+
+    /* Email signup stacks */
+    form { flex-direction: column !important; gap: 10px !important; }
+    form input, form button {
+      border-radius: 6px !important;
+      width: 100% !important;
+    }
+
+    /* Countdown: 2x2 grid instead of 1 row */
+    #days, #hours, #minutes, #seconds { font-size: 30px !important; }
+
+    /* Feature icons stack cleanly */
+    h3 { font-size: 18px !important; }
+    h2 { font-size: 22px !important; }
+
+    /* Hide heavy decorative elements that clutter small screens */
+    .decorative-squiggle, .decorative-splatter { display: none !important; }
+    .decorative-leaf { width: 50px !important; }
+    .decorative-sparkle { width: 26px !important; }
+  }
+
+  @media (max-width: 480px) {
+    nav ul { gap: 10px !important; font-size: 11px !important; }
+  }
 </style>
 </head>
 <body>
