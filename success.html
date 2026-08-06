@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third Eye Goliath — You're In!</title>
+<style>
+  :root { --neon-yellow:#f4e83a; --neon-green:#7ed321; --neon-pink:#ff2e88; --bg-black:#060608; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg-black) url('assets/background.png') no-repeat center top;
+    background-size: cover;
+    font-family:'Arial Black', Impact, sans-serif;
+    color:#fff; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:40px 20px;
+  }
+  img.logo { height:70px; margin-bottom:30px; }
+  h1 { color:var(--neon-green); font-size:42px; letter-spacing:2px; margin-bottom:14px; }
+  p { font-family:Arial, sans-serif; font-weight:normal; color:#ccc; font-size:16px; max-width:480px; line-height:1.6; margin-bottom:34px; }
+  a.back {
+    display:inline-block; background:var(--neon-green); color:var(--bg-black);
+    text-decoration:none; font-weight:bold; letter-spacing:1px; padding:14px 32px;
+    border-radius:6px; font-size:14px;
+  }
+  a.back:hover { background:var(--neon-yellow); }
+  @media (max-width:480px) { h1 { font-size:30px; } img.logo { height:50px; } }
+</style>
+</head>
+<body>
+  <img class="logo" src="assets/logo.png" alt="Third Eye Goliath">
+  <h1>YOU'RE IN.</h1>
+  <p>Welcome to the tribe. You'll be the first to know when we launch — new designs, early access, and a few surprises along the way. Stay lifted, stay tuned.</p>
+  <a class="back" href="index.html">BACK TO HOME</a>
+</body>
+</html>

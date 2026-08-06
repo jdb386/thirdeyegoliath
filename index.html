@@ -129,14 +129,15 @@
     <p style="font-family:Arial, sans-serif; font-weight:normal; color:#ccc; margin:10px 0 20px;">
       Get exclusive updates, early access, and special offers delivered straight to your inbox.
     </p>
-    <form style="display:flex; gap:0; max-width:500px; margin:0 auto;" onsubmit="return handleSignup(event)">
-      <input type="email" id="emailInput" required placeholder="Enter your email address"
-        style="flex:1; padding:14px; border:none; border-radius:6px 0 0 6px; font-family:Arial, sans-serif; font-size:14px;">
-      <button type="submit" style="background:var(--neon-green); border:none; padding:14px 24px; font-weight:bold; border-radius:0 6px 6px 0; cursor:pointer; letter-spacing:1px;">
+    <a href="https://preview.mailerlite.io/forms/2560274/195063288326784042/share"
+       style="display:flex; max-width:500px; margin:0 auto; text-decoration:none;">
+      <span style="flex:1; padding:14px; background:#f5f5f5; border-radius:6px 0 0 6px; font-family:Arial, sans-serif; font-size:14px; color:#888; text-align:left;">
+        Enter your email address
+      </span>
+      <span style="background:var(--neon-green); color:var(--bg-black); padding:14px 24px; font-weight:bold; border-radius:0 6px 6px 0; letter-spacing:1px;">
         NOTIFY ME
-      </button>
-    </form>
-    <p id="signupMessage" style="font-family:Arial, sans-serif; color:var(--neon-green); margin-top:10px; display:none;">Thanks — you're on the list!</p>
+      </span>
+    </a>
   </div>
 </section>
 
@@ -231,14 +232,6 @@
     document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
   }, 1000);
 
-  function handleSignup(event) {
-    event.preventDefault();
-    // NOTE: this only shows a confirmation message — it does not actually
-    // store or send the email anywhere yet.
-    document.getElementById("signupMessage").style.display = "block";
-    document.getElementById("emailInput").value = "";
-    return false;
-  }
 </script>
 
 </body>
