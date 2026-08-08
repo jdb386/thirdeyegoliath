@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third Eye Goliath — Shop</title>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2560274');
+</script>
+<!-- End MailerLite Universal -->
+<style>
+  :root { --neon-yellow:#f4e83a; --neon-green:#7ed321; --neon-pink:#ff2e88; --neon-orange:#f5941f; --bg-black:#060608; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg-black) url('assets/background.png') no-repeat center top;
+    background-size: cover;
+    font-family:'Arial Black', Impact, sans-serif;
+    color:#fff; min-height:100vh;
+  }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; }
+  nav ul { display:flex; gap:30px; list-style:none; font-size:14px; letter-spacing:1px; }
+  nav a { color:#fff; text-decoration:none; }
+  nav a.active { color:var(--neon-pink); border-bottom:2px solid var(--neon-pink); padding-bottom:4px; }
+  .shop-msg { text-align:center; padding:40px 20px 10px; }
+  .shop-msg h2 { color:var(--neon-pink); letter-spacing:2px; font-size:28px; margin-bottom:14px; }
+  .shop-msg p { font-family:Arial, sans-serif; font-weight:normal; color:#ccc; max-width:500px; margin:0 auto; }
+  @media (max-width:768px) {
+    nav { flex-wrap:wrap; justify-content:center; gap:12px; padding:16px 12px; }
+    nav ul { gap:14px; flex-wrap:wrap; justify-content:center; font-size:12px; order:3; width:100%; }
+    nav img { height:44px; }
+    .shop-msg h2 { font-size:22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><img src="assets/logo.png" alt="Third Eye Goliath" style="height:55px;"></a>
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="shop.html" class="active">SHOP</a></li>
+    <li><a href="collections.html">COLLECTIONS</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+  </ul>
+  <img src="assets/icon-instagram.png" alt="Instagram" style="height:24px;">
+</nav>
+
+<div class="shop-msg">
+  <h2>SHOP OPENS AT LAUNCH</h2>
+  <p>Our store isn't live just yet — but the countdown is on. Check out the Collections page to preview designs in the meantime.</p>
+</div>
+
+<!-- COUNTDOWN -->
+<section style="text-align:center; padding:50px 20px; position:relative; z-index:2;">
+  <img class="section-divider" src="assets/divider.png" alt="" style="max-width:500px; width:100%; margin:0 auto 15px; display:block;">
+  <h3 style="color:var(--neon-green); font-size:24px; letter-spacing:1px; margin-top:-10px; margin-bottom:25px;">LAUNCHING IN</h3>
+  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <div style="border:2px solid var(--neon-yellow); border-radius:10px; padding:20px 25px; min-width:100px;">
+      <div id="days" style="font-size:38px; color:var(--neon-yellow);">00</div>
+      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">DAYS</div>
+    </div>
+    <div style="border:2px solid var(--neon-green); border-radius:10px; padding:20px 25px; min-width:100px;">
+      <div id="hours" style="font-size:38px; color:var(--neon-green);">00</div>
+      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">HOURS</div>
+    </div>
+    <div style="border:2px solid var(--neon-pink); border-radius:10px; padding:20px 25px; min-width:100px;">
+      <div id="minutes" style="font-size:38px; color:var(--neon-pink);">00</div>
+      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">MINUTES</div>
+    </div>
+    <div style="border:2px solid var(--neon-orange); border-radius:10px; padding:20px 25px; min-width:100px;">
+      <div id="seconds" style="font-size:38px; color:var(--neon-orange);">00</div>
+      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">SECONDS</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const launchDate = new Date("October 1, 2026 00:00:00").getTime();
+  const countdown = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+    if (distance < 0) {
+      clearInterval(countdown);
+      ["days","hours","minutes","seconds"].forEach(id => document.getElementById(id).textContent = "00");
+      return;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("days").textContent = String(days).padStart(2, '0');
+    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+  }, 1000);
+</script>
+
+</body>
+</html>
