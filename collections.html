@@ -22,6 +22,8 @@
     ml('account', '2560274');
 </script>
 <!-- End MailerLite Universal -->
+<!-- Supabase (design voting) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root { --neon-pink:#ff2e88; --neon-green:#7ed321; --bg-black:#060608; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -58,7 +60,17 @@
     z-index:999; justify-content:center; align-items:center; padding:40px;
   }
   #lightbox.open { display:flex; }
-  #lightbox img { max-width:95%; max-height:95%; object-fit:contain; border-radius:6px; }
+  #lightboxContent { display:flex; flex-direction:column; align-items:center; gap:16px; max-width:95%; max-height:95%; }
+  #lightboxContent img { max-width:100%; max-height:80vh; object-fit:contain; border-radius:6px; }
+  #voteBar { display:flex; gap:20px; justify-content:center; }
+  .vote-btn {
+    background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.2); color:#fff;
+    font-family:Arial, sans-serif; font-size:16px; padding:8px 18px; border-radius:8px;
+    cursor:pointer; transition:all .15s;
+  }
+  .vote-btn:hover:not(:disabled) { border-color:var(--neon-pink); background:rgba(255,46,136,0.15); }
+  .vote-btn:disabled { cursor:default; opacity:0.6; }
+  .vote-btn.voted { border-color:var(--neon-green); background:rgba(126,211,33,0.2); }
   #lightbox .close {
     position:absolute; top:20px; right:34px; font-size:44px; color:#fff;
     cursor:pointer; line-height:1; user-select:none;
@@ -132,7 +144,13 @@
 
 <div id="lightbox">
   <span class="close">&times;</span>
-  <img id="lightboxImg" src="" alt="">
+  <div id="lightboxContent">
+    <img id="lightboxImg" src="" alt="">
+    <div id="voteBar">
+      <button id="voteUp" class="vote-btn" type="button">👍 <span id="upCount">0</span></button>
+      <button id="voteDown" class="vote-btn" type="button">👎 <span id="downCount">0</span></button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -239,7 +257,7 @@ function render(cat) {
     img.src = "assets/collections/" + name;
     img.loading = "lazy";
     img.alt = "";
-    img.addEventListener("click", () => openLightbox(img.src));
+    img.addEventListener("click", () => openLightbox(img.src, name));
     gallery.appendChild(img);
   });
   window.scrollTo({ top:0, behavior:"smooth" });
@@ -256,8 +274,79 @@ document.querySelectorAll(".sidebar a").forEach(link => {
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
-function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add("open"); }
-function closeLightbox() { lightbox.classList.remove("open"); lightboxImg.src = ""; }
+
+// --- Design voting (Supabase) ---
+const sbClient = supabase.createClient(
+  "https://wuewmtmmcqxxqftnapdu.supabase.co",
+  "sb_publishable_3PW24OqcikZGlJI_6m5U1g_cnpcdek9"
+);
+let currentDesignId = null;
+const VOTE_STORAGE_KEY = "teg_voted_designs";
+
+function getVotedDesigns() {
+  try { return JSON.parse(localStorage.getItem(VOTE_STORAGE_KEY) || "{}"); }
+  catch (e) { return {}; }
+}
+function rememberVote(designId, type) {
+  const voted = getVotedDesigns();
+  voted[designId] = type;
+  localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voted));
+}
+
+const upCountEl = document.getElementById("upCount");
+const downCountEl = document.getElementById("downCount");
+const voteUpBtn = document.getElementById("voteUp");
+const voteDownBtn = document.getElementById("voteDown");
+
+async function loadVoteCounts(designId) {
+  upCountEl.textContent = "0";
+  downCountEl.textContent = "0";
+  const { data } = await sbClient
+    .from("design_votes")
+    .select("up_count,down_count")
+    .eq("design_id", designId)
+    .maybeSingle();
+  if (data) {
+    upCountEl.textContent = data.up_count;
+    downCountEl.textContent = data.down_count;
+  }
+}
+
+function refreshVoteButtons(designId) {
+  const voted = getVotedDesigns();
+  const choice = voted[designId];
+  voteUpBtn.classList.toggle("voted", choice === "up");
+  voteDownBtn.classList.toggle("voted", choice === "down");
+  voteUpBtn.disabled = Boolean(choice);
+  voteDownBtn.disabled = Boolean(choice);
+}
+
+async function castVote(type) {
+  if (!currentDesignId) return;
+  const voted = getVotedDesigns();
+  if (voted[currentDesignId]) return;
+  const { data, error } = await sbClient.rpc("increment_vote", {
+    p_design_id: currentDesignId,
+    p_vote_type: type
+  });
+  if (!error && data && data[0]) {
+    upCountEl.textContent = data[0].up_count;
+    downCountEl.textContent = data[0].down_count;
+  }
+  rememberVote(currentDesignId, type);
+  refreshVoteButtons(currentDesignId);
+}
+
+voteUpBtn.addEventListener("click", () => castVote("up"));
+voteDownBtn.addEventListener("click", () => castVote("down"));
+
+function openLightbox(src, designId) {
+  lightboxImg.src = src;
+  currentDesignId = designId;
+  lightbox.classList.add("open");
+  loadVoteCounts(designId).then(() => refreshVoteButtons(designId));
+}
+function closeLightbox() { lightbox.classList.remove("open"); lightboxImg.src = ""; currentDesignId = null; }
 document.querySelector("#lightbox .close").addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
