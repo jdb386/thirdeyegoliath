@@ -339,10 +339,8 @@ async function castVote(type) {
   });
   if (error) {
     console.error("Vote failed:", error);
-    if (error.message && error.message.includes("Already voted")) {
-      alert("Looks like this design already has a vote from your network.");
-      rememberVote(currentDesignId, type);
-      refreshVoteButtons(currentDesignId);
+    if (error.message && error.message.includes("Rate limit")) {
+      alert("You've hit the vote limit for now — try again in a little while.");
     } else {
       alert("Vote didn't save — check console for details.");
     }
