@@ -339,7 +339,13 @@ async function castVote(type) {
   });
   if (error) {
     console.error("Vote failed:", error);
-    alert("Vote didn't save — check console for details.");
+    if (error.message && error.message.includes("Already voted")) {
+      alert("Looks like this design already has a vote from your network.");
+      rememberVote(currentDesignId, type);
+      refreshVoteButtons(currentDesignId);
+    } else {
+      alert("Vote didn't save — check console for details.");
+    }
     return;
   }
   if (data && data[0]) {
