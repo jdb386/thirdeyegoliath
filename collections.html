@@ -329,7 +329,12 @@ async function castVote(type) {
     p_design_id: currentDesignId,
     p_vote_type: type
   });
-  if (!error && data && data[0]) {
+  if (error) {
+    console.error("Vote failed:", error);
+    alert("Vote didn't save — check console for details.");
+    return;
+  }
+  if (data && data[0]) {
     upCountEl.textContent = data[0].up_count;
     downCountEl.textContent = data[0].down_count;
   }
