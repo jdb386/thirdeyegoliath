@@ -36,6 +36,8 @@
     ml('account', '2560274');
 </script>
 <!-- End MailerLite Universal -->
+<!-- Supabase (design voting leaderboard) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
     --bg: #050309;
@@ -133,10 +135,14 @@
   </div>
 </nav>
 
-<!-- VOTE ON DESIGNS BANNER -->
-<a href="collections.html" style="display:block; position:relative; z-index:5; text-decoration:none;">
-  <img src="assets/Voting.png" alt="Vote on Designs" style="width:100%; display:block;">
-</a>
+<!-- VOTE ON DESIGNS -->
+<section style="max-width:1000px; margin:0 auto; padding:30px 40px; position:relative; z-index:2; text-align:center;">
+  <img class="section-divider" src="assets/divider.png" alt="">
+  <h3 style="color:var(--gold); font-family:'Unbounded', sans-serif; font-size:24px; letter-spacing:1px; margin-top:-10px; margin-bottom:8px;">VOTE ON DESIGNS</h3>
+  <p style="font-family:'Space Grotesk', sans-serif; color:var(--muted); font-size:14px; margin-bottom:28px;">Help choose what drops first. Every vote shapes the launch.</p>
+  <div id="leaderboard" style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap;"></div>
+  <a href="collections.html" style="display:inline-block; margin-top:24px; font-family:'Unbounded', sans-serif; font-size:13px; letter-spacing:1px; color:var(--gold); text-decoration:none; border-bottom:2px solid var(--gold); padding-bottom:3px;">SEE ALL DESIGNS &amp; VOTE →</a>
+</section>
 
 <!-- Scattered decorative accents -->
 <img class="decorative-sparkle" src="assets/accent-sparkle.png" style="top:80px; left:15%;">
@@ -146,16 +152,16 @@
 <img class="decorative-splatter" src="assets/accent-splatter.png" style="bottom:60px; left:10%; opacity:0.4;">
 
 <!-- HERO -->
-<section style="display:flex; align-items:center; justify-content:center; gap:40px; padding:40px; position:relative; flex-wrap:wrap; z-index:2;">
+<section style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px; position:relative; z-index:2;">
 
-  <img src="assets/wizard.png" alt="Third Eye Goliath Wizard" style="max-width:450px; width:100%; z-index:2;">
+  <img src="assets/teg-logo-eye.svg" alt="Third Eye Goliath Eye" style="max-width:200px; width:45%; z-index:2;">
 
-  <div style="text-align:center; z-index:2;">
+  <div style="text-align:center; z-index:2; margin-top:10px;">
     <p style="letter-spacing:2px; color:var(--gold); font-family:'Unbounded', sans-serif; font-weight:700; font-size:14px; margin-bottom:10px;">✦ WEAR THE WEIRD ✦</p>
-    <img src="assets/logo.png" alt="Third Eye Goliath" style="max-width:500px; width:100%;">
-    <img src="assets/coming-soon.png" alt="Coming Soon" style="max-width:400px; width:100%; margin-top:10px;">
+    <h1 style="font-family:'Unbounded', sans-serif; font-weight:900; font-size:clamp(30px,6vw,58px); letter-spacing:2px; color:var(--text); line-height:1.05;">THIRD EYE GOLIATH</h1>
+    <p style="font-family:'Unbounded', sans-serif; font-weight:700; letter-spacing:4px; color:var(--gold); font-size:15px; margin-top:8px;">COMING SOON</p>
     <img class="scratch-accent" src="assets/accent-scratch.png" alt="">
-    <h1 style="font-family:'Unbounded', sans-serif; font-size:20px; letter-spacing:1px; color:var(--text); margin-top:14px;">Something epic is rising.</h1>
+    <h2 style="font-family:'Unbounded', sans-serif; font-size:20px; letter-spacing:1px; color:var(--text); margin-top:14px;">Something epic is rising.</h2>
     <p style="margin-top:10px; font-family:'Space Grotesk', sans-serif; font-weight:normal; font-size:16px; line-height:1.6; color:var(--text);">
       A new vision. A new vibe. A whole new level.<br>
       <span style="color:var(--violet); font-style:italic;">Stay aligned. Stay tuned.</span>
@@ -261,6 +267,45 @@
     document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
   }, 1000);
 
+</script>
+
+<script>
+  const sbClient = supabase.createClient(
+    "https://wuewmtmmcqxxqftnapdu.supabase.co",
+    "sb_publishable_3PW24OqcikZGlJI_6m5U1g_cnpcdek9"
+  );
+
+  async function loadLeaderboard() {
+    const board = document.getElementById("leaderboard");
+    const { data, error } = await sbClient
+      .from("design_votes")
+      .select("design_id,up_count,down_count")
+      .order("up_count", { ascending: false })
+      .limit(4);
+
+    if (error || !data || !data.length) {
+      console.error("Leaderboard load failed:", error);
+      board.innerHTML = '<p style="font-family:\'Space Grotesk\', sans-serif; color:var(--muted); font-size:13px;">Voting opens soon.</p>';
+      return;
+    }
+
+    const maxUp = Math.max(...data.map(d => d.up_count), 1);
+
+    board.innerHTML = data.map(d => {
+      const pct = Math.round((d.up_count / maxUp) * 100);
+      return `
+        <div style="width:150px; text-align:center;">
+          <img src="assets/collections/${d.design_id}" alt="" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; border:1px solid rgba(212,169,78,0.3);">
+          <div style="font-family:'Unbounded', sans-serif; font-size:13px; color:var(--gold); margin-top:8px;">👍 ${d.up_count}</div>
+          <div style="background:rgba(255,255,255,0.08); border-radius:6px; height:6px; margin-top:6px; overflow:hidden;">
+            <div style="background:var(--gold); height:100%; width:${pct}%;"></div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  loadLeaderboard();
 </script>
 
 </body>
