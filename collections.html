@@ -24,63 +24,76 @@
 <!-- End MailerLite Universal -->
 <!-- Supabase (design voting) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --neon-pink:#ff2e88; --neon-green:#7ed321; --bg-black:#060608; }
+  :root { --bg:#050309; --violet:#7b2ff7; --lav:#a855f7; --teal:#2dd4bf; --gold:#d4a94e; --text:#f5f0ff; --muted:#b8a8d8; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background: var(--bg-black) url('assets/teg-nebula-bg.png') no-repeat center top;
-    background-size: cover;
-    font-family:'Arial Black', Impact, sans-serif;
-    color:#fff; min-height:100vh;
+    background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url('assets/teg-nebula-bg.png') center/cover no-repeat fixed;
+    background-color:var(--bg);
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--text); min-height:100vh; overflow-x:hidden;
   }
-  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; }
-  nav ul { display:flex; gap:30px; list-style:none; font-size:14px; letter-spacing:1px; }
-  nav a { color:#fff; text-decoration:none; }
-  nav a.active { color:var(--neon-pink); border-bottom:2px solid var(--neon-pink); padding-bottom:4px; }
-  .layout { display:flex; gap:30px; padding:20px 40px 60px; max-width:1500px; margin:0 auto; }
+  #stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .topnav { position:relative; z-index:5; display:flex; justify-content:center; gap:28px; padding:22px 16px; flex-wrap:wrap; }
+  .topnav a { color:var(--muted); text-decoration:none; font-family:'Unbounded',sans-serif; font-size:12px; letter-spacing:.18em; transition:color .2s; }
+  .topnav a:hover, .topnav a.active { color:var(--gold); }
+  .layout { position:relative; z-index:1; display:flex; gap:30px; padding:20px 40px 60px; max-width:1500px; margin:0 auto; }
   .sidebar { flex:0 0 200px; }
-  .sidebar h3 { color:var(--neon-pink); font-size:16px; letter-spacing:1px; margin-bottom:14px; }
+  .sidebar h3 { font-family:'Unbounded',sans-serif; color:var(--gold); font-size:14px; letter-spacing:.15em; margin-bottom:14px; }
   .sidebar a {
-    display:block; color:#ccc; text-decoration:none; font-family:Arial, sans-serif;
+    display:block; color:var(--muted); text-decoration:none;
     font-size:14px; padding:9px 12px; border-left:3px solid transparent; transition:all .15s;
   }
-  .sidebar a:hover { color:var(--neon-green); border-left-color:var(--neon-green); background:rgba(255,255,255,0.04); }
-  .sidebar a.current { color:var(--neon-pink); border-left-color:var(--neon-pink); background:rgba(255,46,136,0.08); }
+  .sidebar a:hover { color:var(--teal); border-left-color:var(--teal); background:rgba(255,255,255,0.04); }
+  .sidebar a.current { color:var(--gold); border-left-color:var(--gold); background:rgba(212,169,78,0.08); }
   .content { flex:1; }
-  .content h2 { color:var(--neon-pink); letter-spacing:2px; margin-bottom:8px; }
-  .content .sub { font-family:Arial, sans-serif; font-weight:normal; color:#999; font-size:14px; margin-bottom:26px; }
+  .content h2 { font-family:'Unbounded',sans-serif; font-weight:900; letter-spacing:.05em; margin-bottom:8px;
+    background:linear-gradient(100deg,#fff,var(--lav)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .content .sub { color:var(--muted); font-size:14px; margin-bottom:26px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:16px; }
-  .grid-card { display:flex; flex-direction:column; gap:8px; }
+  .grid-card { display:flex; flex-direction:column; gap:8px; background:rgba(13,8,23,.85); border:1px solid rgba(168,85,247,.28);
+    border-radius:14px; padding:10px; }
   .grid-card img {
     width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;
-    border:1px solid rgba(255,255,255,0.1); cursor:pointer; transition:transform .15s, border-color .15s;
+    border:1px solid rgba(255,255,255,0.08); cursor:pointer; transition:transform .15s, border-color .15s;
   }
-  .grid-card img:hover { transform:scale(1.03); border-color:var(--neon-pink); }
+  .grid-card img:hover { transform:scale(1.03); border-color:var(--gold); }
   .grid-votes { display:flex; gap:8px; }
   #lightbox {
-    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.93);
+    display:none; position:fixed; inset:0; background:rgba(5,3,9,0.94);
     z-index:999; justify-content:center; align-items:center; padding:40px;
   }
   #lightbox.open { display:flex; }
   #lightbox img { max-width:95%; max-height:95%; object-fit:contain; border-radius:6px; }
   .vote-btn {
-    background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.2); color:#fff;
-    font-family:Arial, sans-serif; font-size:16px; padding:8px 18px; border-radius:8px;
+    background:#0d0817; border:1px solid rgba(168,85,247,.35); color:var(--text);
+    font-family:inherit; font-size:16px; padding:8px 18px; border-radius:10px;
     cursor:pointer; transition:all .15s; flex:1;
   }
-  .vote-btn.small { font-size:13px; padding:6px 8px; border-radius:6px; }
-  .vote-btn:hover:not(:disabled) { border-color:var(--neon-pink); background:rgba(255,46,136,0.15); }
+  .vote-btn.small { font-size:13px; padding:6px 8px; border-radius:8px; }
+  .vote-btn:hover:not(:disabled) { border-color:var(--teal); box-shadow:0 0 14px rgba(45,212,191,.35); }
   .vote-btn:disabled { cursor:default; opacity:0.6; }
-  .vote-btn.voted { border-color:var(--neon-green); background:rgba(126,211,33,0.2); }
+  .vote-btn.voted { border-color:var(--teal); box-shadow:0 0 14px rgba(45,212,191,.35); opacity:1; }
   #lightbox .close {
     position:absolute; top:20px; right:34px; font-size:44px; color:#fff;
     cursor:pointer; line-height:1; user-select:none;
   }
-  #lightbox .close:hover { color:var(--neon-pink); }
+  #lightbox .close:hover { color:var(--gold); }
+  .moon-div { text-align:center; color:var(--gold); letter-spacing:.8em; font-size:20px; opacity:.8; margin-bottom:26px; }
+  .socials { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:26px; }
+  .soc { border:1px solid rgba(184,168,216,.35); border-radius:999px; padding:10px 22px; color:var(--text);
+    text-decoration:none; font-size:14px; font-weight:500; transition:all .2s; background:rgba(5,3,9,.5); }
+  .soc:hover { border-color:var(--teal); color:var(--teal); box-shadow:0 0 18px rgba(45,212,191,.3); }
+  footer { border-top:1px solid rgba(168,85,247,.25); padding:56px 24px 40px; text-align:center; position:relative; z-index:1; }
+  .copy { color:var(--muted); font-size:14px; }
   @media (max-width:768px) {
-    nav { flex-wrap:wrap; justify-content:center; gap:12px; padding:16px 12px; }
-    nav ul { gap:14px; flex-wrap:wrap; justify-content:center; font-size:12px; order:3; width:100%; }
-    nav img { height:44px; }
+    .topnav { gap:14px; }
+    .topnav a { font-size:10px; }
     .layout { flex-direction:column; padding:16px 14px 40px; gap:20px; }
     .sidebar { flex:none; }
     .sidebar h3 { margin-bottom:10px; }
@@ -89,7 +102,7 @@
       padding:7px 12px; margin:0 4px 6px 0; background:rgba(255,255,255,0.05); border-radius:4px;
     }
     .sidebar a:hover, .sidebar a.current {
-      border-left:none; border-bottom-color:var(--neon-pink);
+      border-left:none; border-bottom-color:var(--gold);
     }
     .grid { grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:10px; }
     .content h2 { font-size:20px; }
@@ -99,17 +112,14 @@
 </style>
 </head>
 <body>
+<canvas id="stars"></canvas>
 
-<nav>
-  <a href="index.html"><img src="assets/logo.png" alt="Third Eye Goliath" style="height:55px;"></a>
-  <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener">SHOP</a></li>
-    <li><a href="collections.html" class="active">COLLECTIONS</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
-  </ul>
-  <a href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener"><img src="assets/icon-instagram.png" alt="Instagram" style="height:24px;"></a>
+<nav class="topnav">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener">SHOP</a>
+  <a href="collections.html" class="active">COLLECTIONS</a>
+  <a href="contact.html">CONTACT</a>
 </nav>
 
 <div class="layout">
@@ -377,6 +387,35 @@ lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightb
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
 render("featured");
+</script>
+
+<footer>
+  <div class="moon-div">☽ ☾ ☽</div>
+  <div class="socials">
+    <a class="soc" href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener">Instagram · @thirdeyegoliath</a>
+    <a class="soc" href="https://www.facebook.com/share/1DHixhSDpo/" target="_blank" rel="noopener">Facebook</a>
+    <a class="soc" href="https://www.tiktok.com/@thirdeyegoliath" target="_blank" rel="noopener">TikTok</a>
+    <a class="soc" href="https://x.com/ThirdEyeGoliath" target="_blank" rel="noopener">X</a>
+  </div>
+  <div class="copy">© 2026 Third Eye Goliath — Wear the weird.</div>
+</footer>
+
+<script>
+(function(){
+  const c = document.getElementById('stars'), x = c.getContext('2d');
+  let stars = [];
+  function sizeCanvas(){ c.width = innerWidth; c.height = innerHeight;
+    stars = Array.from({length: 160}, () => ({x: Math.random()*c.width, y: Math.random()*c.height,
+      r: Math.random()*1.6+.3, p: Math.random()*Math.PI*2, sp: .008+Math.random()*.02}));
+  }
+  sizeCanvas(); addEventListener('resize', sizeCanvas);
+  (function draw(){
+    x.clearRect(0,0,c.width,c.height);
+    for(const s of stars){ s.p += s.sp; x.globalAlpha = .25 + Math.abs(Math.sin(s.p))*.6; x.fillStyle = '#e8dcff';
+      x.beginPath(); x.arc(s.x, s.y, s.r, 0, 7); x.fill(); }
+    x.globalAlpha = 1; requestAnimationFrame(draw);
+  })();
+})();
 </script>
 
 </body>
