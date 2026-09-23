@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Third Eye Goliath — Shop</title>
+<link rel="icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R"></script>
 <script>
@@ -12,7 +14,6 @@
   gtag('js', new Date());
   gtag('config', 'G-ZP7ZBNHE8R');
 </script>
-<!-- End Google tag -->
 <!-- MailerLite Universal -->
 <script>
     (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
@@ -21,94 +22,111 @@
     (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
     ml('account', '2560274');
 </script>
-<!-- End MailerLite Universal -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --neon-yellow:#f4e83a; --neon-green:#7ed321; --neon-pink:#ff2e88; --neon-orange:#f5941f; --bg-black:#060608; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg-black) url('assets/background.png') no-repeat center top;
-    background-size: cover;
-    font-family:'Arial Black', Impact, sans-serif;
-    color:#fff; min-height:100vh;
-  }
-  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; }
-  nav ul { display:flex; gap:30px; list-style:none; font-size:14px; letter-spacing:1px; }
-  nav a { color:#fff; text-decoration:none; }
-  nav a.active { color:var(--neon-pink); border-bottom:2px solid var(--neon-pink); padding-bottom:4px; }
-  .shop-msg { text-align:center; padding:40px 20px 10px; }
-  .shop-msg h2 { color:var(--neon-pink); letter-spacing:2px; font-size:28px; margin-bottom:14px; }
-  .shop-msg p { font-family:Arial, sans-serif; font-weight:normal; color:#ccc; max-width:500px; margin:0 auto; }
-  @media (max-width:768px) {
-    nav { flex-wrap:wrap; justify-content:center; gap:12px; padding:16px 12px; }
-    nav ul { gap:14px; flex-wrap:wrap; justify-content:center; font-size:12px; order:3; width:100%; }
-    nav img { height:44px; }
-    .shop-msg h2 { font-size:22px; }
-  }
+:root{ --bg:#050309; --violet:#7b2ff7; --lav:#a855f7; --teal:#2dd4bf; --gold:#d4a94e; --text:#f5f0ff; --muted:#b8a8d8; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url("assets/teg-nebula-bg.png") center/cover no-repeat fixed;
+  background-color:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;min-height:100vh}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.topnav{position:relative;z-index:5;display:flex;justify-content:center;gap:28px;padding:22px 16px;flex-wrap:wrap}
+.topnav a{color:var(--muted);text-decoration:none;font-family:'Unbounded',sans-serif;font-size:12px;letter-spacing:.18em;transition:color .2s}
+.topnav a:hover,.topnav a.active{color:var(--gold)}
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:60px 24px 60px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.eye-logo{width:80px;height:80px;margin-bottom:20px;filter:drop-shadow(0 0 18px rgba(212,169,78,.55))}
+.page h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(26px,5vw,44px);letter-spacing:.05em;margin-bottom:14px;
+  background:linear-gradient(100deg,#fff,var(--lav));-webkit-background-clip:text;background-clip:text;color:transparent}
+.page .lead{color:var(--muted);font-size:17px;max-width:520px;line-height:1.6;margin-bottom:44px}
+.page .lead a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold)}
+.countdown-label{letter-spacing:.4em;font-size:13px;color:var(--muted);font-weight:700;margin-bottom:14px}
+.countdown{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cd-block{background:rgba(26,15,46,.72);border:1px solid rgba(168,85,247,.35);border-radius:16px;
+  min-width:96px;padding:18px 10px;backdrop-filter:blur(8px);box-shadow:0 0 28px rgba(123,47,247,.25)}
+.cd-num{font-family:'Unbounded',sans-serif;font-weight:900;font-size:38px;color:#fff;text-shadow:0 0 22px var(--violet)}
+.cd-lab{font-size:11px;letter-spacing:.25em;color:var(--muted);margin-top:6px}
+.moon-div{text-align:center;color:var(--gold);letter-spacing:.8em;font-size:20px;opacity:.8}
+.socials{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.soc{border:1px solid rgba(184,168,216,.35);border-radius:999px;padding:10px 22px;color:var(--text);
+  text-decoration:none;font-size:14px;font-weight:500;transition:all .2s;background:rgba(5,3,9,.5)}
+.soc:hover{border-color:var(--teal);color:var(--teal);box-shadow:0 0 18px rgba(45,212,191,.3)}
+footer{border-top:1px solid rgba(168,85,247,.25);padding:56px 24px 40px;text-align:center;position:relative;z-index:1}
+footer .moon-div{margin-bottom:26px}
+footer .socials{margin-bottom:26px}
+.copy{color:var(--muted);font-size:14px}
+@media(max-width:560px){ .topnav{gap:14px} .topnav a{font-size:10px} .cd-block{min-width:72px;padding:14px 6px} .cd-num{font-size:30px} }
 </style>
 </head>
 <body>
+<canvas id="stars"></canvas>
 
-<nav>
-  <a href="index.html"><img src="assets/logo.png" alt="Third Eye Goliath" style="height:55px;"></a>
-  <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener">SHOP</a></li>
-    <li><a href="collections.html">COLLECTIONS</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
-  </ul>
-  <a href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener"><img src="assets/icon-instagram.png" alt="Instagram" style="height:24px;"></a>
+<nav class="topnav">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener" class="active">SHOP</a>
+  <a href="collections.html">COLLECTIONS</a>
+  <a href="contact.html">CONTACT</a>
 </nav>
 
-<div class="shop-msg">
-  <h2>SHOP OPENS AT LAUNCH</h2>
-  <p>Our store isn't live just yet — but the countdown is on. Check out the Collections page to preview designs in the meantime.</p>
-</div>
+<main class="page">
+  <svg class="eye-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#d4a94e" stroke-width="3">
+    <path d="M8 50 Q50 12 92 50 Q50 88 8 50 Z"/>
+    <circle cx="50" cy="50" r="14" fill="#d4a94e" stroke="none"/>
+    <circle cx="50" cy="50" r="6" fill="#050309" stroke="none"/>
+    <line x1="50" y1="6" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="94"/>
+    <line x1="14" y1="22" x2="22" y2="30"/><line x1="78" y1="70" x2="86" y2="78"/>
+    <line x1="86" y1="22" x2="78" y2="30"/><line x1="22" y1="70" x2="14" y2="78"/>
+  </svg>
+  <h1>SHOP OPENS AT LAUNCH</h1>
+  <p class="lead">Our store isn't live just yet — but the countdown is on. Check out the <a href="collections.html">Collections</a> page to preview designs in the meantime.</p>
 
-<!-- COUNTDOWN -->
-<section style="text-align:center; padding:50px 20px; position:relative; z-index:2;">
-  <img class="section-divider" src="assets/divider.png" alt="" style="max-width:500px; width:100%; margin:0 auto 15px; display:block;">
-  <h3 style="color:var(--neon-green); font-size:24px; letter-spacing:1px; margin-top:-10px; margin-bottom:25px;">LAUNCHING IN</h3>
-  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-    <div style="border:2px solid var(--neon-yellow); border-radius:10px; padding:20px 25px; min-width:100px;">
-      <div id="days" style="font-size:38px; color:var(--neon-yellow);">00</div>
-      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">DAYS</div>
-    </div>
-    <div style="border:2px solid var(--neon-green); border-radius:10px; padding:20px 25px; min-width:100px;">
-      <div id="hours" style="font-size:38px; color:var(--neon-green);">00</div>
-      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">HOURS</div>
-    </div>
-    <div style="border:2px solid var(--neon-pink); border-radius:10px; padding:20px 25px; min-width:100px;">
-      <div id="minutes" style="font-size:38px; color:var(--neon-pink);">00</div>
-      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">MINUTES</div>
-    </div>
-    <div style="border:2px solid var(--neon-orange); border-radius:10px; padding:20px 25px; min-width:100px;">
-      <div id="seconds" style="font-size:38px; color:var(--neon-orange);">00</div>
-      <div style="font-family:Arial, sans-serif; font-size:12px; letter-spacing:2px; color:#ccc;">SECONDS</div>
-    </div>
+  <div class="countdown-label">LAUNCHING IN</div>
+  <div class="countdown">
+    <div class="cd-block"><div class="cd-num" id="cd-d">--</div><div class="cd-lab">DAYS</div></div>
+    <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-lab">HOURS</div></div>
+    <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-lab">MINUTES</div></div>
+    <div class="cd-block"><div class="cd-num" id="cd-s">--</div><div class="cd-lab">SECONDS</div></div>
   </div>
-</section>
+</main>
+
+<footer>
+  <div class="moon-div">☽ ☾ ☽</div>
+  <div class="socials">
+    <a class="soc" href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener">Instagram · @thirdeyegoliath</a>
+    <a class="soc" href="https://www.facebook.com/share/1DHixhSDpo/" target="_blank" rel="noopener">Facebook</a>
+    <a class="soc" href="https://www.tiktok.com/@thirdeyegoliath" target="_blank" rel="noopener">TikTok</a>
+    <a class="soc" href="https://x.com/ThirdEyeGoliath" target="_blank" rel="noopener">X</a>
+  </div>
+  <div class="copy">© 2026 Third Eye Goliath — Wear the weird.</div>
+</footer>
 
 <script>
-  const launchDate = new Date("October 1, 2026 00:00:00").getTime();
-  const countdown = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = launchDate - now;
-    if (distance < 0) {
-      clearInterval(countdown);
-      ["days","hours","minutes","seconds"].forEach(id => document.getElementById(id).textContent = "00");
-      return;
-    }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("days").textContent = String(days).padStart(2, '0');
-    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-    document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-    document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
-  }, 1000);
-</script>
+const target = new Date('2026-10-01T00:00:00-04:00').getTime();
+function tick(){
+  let d = target - Date.now(); if(d < 0) d = 0;
+  const days = Math.floor(d/864e5), h = Math.floor(d/36e5)%24, m = Math.floor(d/6e4)%60, s = Math.floor(d/1e3)%60;
+  document.getElementById('cd-d').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
 
+const c = document.getElementById('stars'), x = c.getContext('2d');
+let stars = [];
+function sizeCanvas(){ c.width = innerWidth; c.height = innerHeight;
+  stars = Array.from({length: 160}, () => ({x: Math.random()*c.width, y: Math.random()*c.height,
+    r: Math.random()*1.6+.3, p: Math.random()*Math.PI*2, sp: .008+Math.random()*.02}));
+}
+sizeCanvas(); addEventListener('resize', sizeCanvas);
+(function draw(){
+  x.clearRect(0,0,c.width,c.height);
+  for(const s of stars){ s.p += s.sp; x.globalAlpha = .25 + Math.abs(Math.sin(s.p))*.6; x.fillStyle = '#e8dcff';
+    x.beginPath(); x.arc(s.x, s.y, s.r, 0, 7); x.fill(); }
+  x.globalAlpha = 1; requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
