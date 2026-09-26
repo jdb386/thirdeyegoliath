@@ -64,6 +64,13 @@
   }
   .grid-card img:hover { transform:scale(1.03); border-color:var(--gold); }
   .grid-votes { display:flex; gap:8px; }
+  .locked-panel { grid-column:1/-1; position:relative; border-radius:20px; overflow:hidden; min-height:340px;
+    border:1px solid rgba(212,169,78,.35); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:40px 24px; background:radial-gradient(circle at 50% 40%, #3b1c5c, #0d0817 75%); }
+  .locked-panel .lock { font-size:48px; margin-bottom:16px; filter:drop-shadow(0 0 14px rgba(212,169,78,.6)); }
+  .locked-panel h3 { font-family:'Unbounded',sans-serif; font-size:24px; letter-spacing:.06em; margin-bottom:10px; }
+  .locked-panel p { color:var(--gold); font-weight:700; letter-spacing:.2em; font-size:14px; margin-bottom:14px; }
+  .locked-panel .locked-sub { color:var(--muted); font-size:14px; max-width:420px; }
   #lightbox {
     display:none; position:fixed; inset:0; background:rgba(5,3,9,0.94);
     z-index:999; justify-content:center; align-items:center; padding:40px;
@@ -344,6 +351,18 @@ gallery.addEventListener("click", e => {
   castVoteFor(card.dataset.design, btn.dataset.vote);
 });
 
+// ---- Launch lock: these categories stay hidden until Oct 1, 2026 12:00 AM Eastern, then unlock automatically ----
+const LAUNCH_TIME = new Date("2026-10-01T00:00:00-04:00").getTime();
+const LOCKED_CATS = { goddess: "THE GODDESS COLLECTION", halloween: "THE HALLOWEEN DROP" };
+function isLocked(cat) { return Date.now() < LAUNCH_TIME && LOCKED_CATS.hasOwnProperty(cat); }
+function isLockedImage(name) {
+  if (Date.now() >= LAUNCH_TIME) return false;
+  return Object.keys(LOCKED_CATS).some(c => catalog[c] && catalog[c].images.includes(name));
+}
+document.querySelectorAll(".sidebar a").forEach(link => {
+  if (isLocked(link.dataset.cat)) link.textContent = "🔒 " + link.textContent;
+});
+
 function render(cat) {
   const data = catalog[cat];
   if (!data) return;
@@ -351,7 +370,19 @@ function render(cat) {
   catSub.textContent = data.sub;
   catSub.style.display = data.sub ? "block" : "none";
   gallery.innerHTML = "";
-  data.images.forEach(name => {
+  if (isLocked(cat)) {
+    gallery.innerHTML = `
+      <div class="locked-panel">
+        <div class="lock">🔒</div>
+        <h3>${LOCKED_CATS[cat]}</h3>
+        <p>UNLOCKS OCTOBER 1ST</p>
+        <div class="locked-sub">No spoilers. Join the list on the homepage to get 10% off on launch day.</div>
+      </div>`;
+    window.scrollTo({ top:0, behavior:"smooth" });
+    return;
+  }
+  const images = cat === "featured" ? data.images.filter(n => !isLockedImage(n)) : data.images;
+  images.forEach(name => {
     const card = document.createElement("div");
     card.className = "grid-card";
     card.dataset.design = name;
@@ -366,7 +397,7 @@ function render(cat) {
     gallery.appendChild(card);
   });
   window.scrollTo({ top:0, behavior:"smooth" });
-  loadCategoryVotes(data.images);
+  loadCategoryVotes(images);
 }
 
 document.querySelectorAll(".sidebar a").forEach(link => {
