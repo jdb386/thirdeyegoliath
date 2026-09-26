@@ -233,16 +233,16 @@ footer .socials{margin-bottom:26px}
     <div class="moon-div">☽ ✦ ☾</div>
     <div class="sec-head reveal">
       <h2>LOCKED &amp; LOADING</h2>
-      <p>Two collections. One launch day. Zero spoilers.</p>
+      <p id="teaser-sub">Two collections. One launch day. Zero spoilers.</p>
     </div>
     <div class="teasers">
-      <div class="teaser t1 reveal">
+      <div class="teaser t1 reveal" data-link="collections.html#goddess">
         <div class="blurbg"></div>
         <div class="lock">🔒</div>
         <h3>THE GODDESS COLLECTION</h3>
         <p>UNLOCKS OCTOBER 1ST</p>
       </div>
-      <div class="teaser t2 reveal">
+      <div class="teaser t2 reveal" data-link="collections.html#halloween">
         <div class="blurbg"></div>
         <div class="lock">🔒</div>
         <h3>THE HALLOWEEN DROP</h3>
@@ -293,6 +293,22 @@ function tick(){
   document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
 }
 tick(); setInterval(tick, 1000);
+
+// Locked & Loading cards unlock automatically at launch and link to their Collections pages
+let teasersUnlocked = false;
+function unlockTeasers(){
+  if (teasersUnlocked || Date.now() < target) return;
+  teasersUnlocked = true;
+  const sub = document.getElementById('teaser-sub');
+  if (sub) sub.textContent = 'Both collections are live. Go explore.';
+  document.querySelectorAll('.teaser[data-link]').forEach(t => {
+    t.querySelector('.lock').textContent = '🔓';
+    t.querySelector('p').textContent = 'NOW UNLOCKED — EXPLORE →';
+    t.style.cursor = 'pointer';
+    t.addEventListener('click', () => { location.href = t.dataset.link; });
+  });
+}
+unlockTeasers(); setInterval(unlockTeasers, 1000);
 
 // ---------- Real voting (same Supabase backend + localStorage key as collections.html) ----------
 const sbClient = supabase.createClient(

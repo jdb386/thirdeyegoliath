@@ -353,7 +353,7 @@ gallery.addEventListener("click", e => {
 
 // ---- Launch lock: these categories stay hidden until Oct 1, 2026 12:00 AM Eastern, then unlock automatically ----
 const LAUNCH_TIME = new Date("2026-10-01T00:00:00-04:00").getTime();
-const LOCKED_CATS = { goddess: "THE GODDESS COLLECTION", halloween: "THE HALLOWEEN DROP" };
+const LOCKED_CATS = { goddess: "THE GODDESS COLLECTION", halloween: "THE HALLOWEEN DROP", ghost: "GHOST HALLOWEEN", blackcat: "BLACK CAT" };
 function isLocked(cat) { return Date.now() < LAUNCH_TIME && LOCKED_CATS.hasOwnProperty(cat); }
 function isLockedImage(name) {
   if (Date.now() >= LAUNCH_TIME) return false;
@@ -417,7 +417,13 @@ document.querySelector("#lightbox .close").addEventListener("click", closeLightb
 lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
-render("featured");
+// Open a category directly from a link like collections.html#goddess
+(function(){
+  const start = location.hash.replace("#", "").toLowerCase();
+  const cat = catalog[start] ? start : "featured";
+  document.querySelectorAll(".sidebar a").forEach(l => l.classList.toggle("current", l.dataset.cat === cat));
+  render(cat);
+})();
 </script>
 
 <footer>
