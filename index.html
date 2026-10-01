@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Third Eye Goliath — Coming Soon</title>
+<title>Third Eye Goliath — Wear the Weird | Shop Now</title>
 <link rel="icon" href="assets/favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:title" content="Third Eye Goliath">
-<meta property="og:description" content="Third Eye Goliath — cosmic streetwear. Wear the weird. Launching October 1st, 2026.">
+<meta property="og:description" content="Third Eye Goliath — cosmic streetwear. Wear the weird. Now open — original gothic-cosmic art on tees, hoodies &amp; tanks.">
 <meta property="og:image" content="https://thirdeyegoliath.com/assets/teg-logo-share.png">
 <meta property="og:url" content="https://thirdeyegoliath.com/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Third Eye Goliath">
-<meta name="twitter:description" content="Third Eye Goliath — cosmic streetwear. Wear the weird. Launching October 1st, 2026.">
+<meta name="twitter:description" content="Third Eye Goliath — cosmic streetwear. Wear the weird. Now open — original gothic-cosmic art on tees, hoodies &amp; tanks.">
 <meta name="twitter:image" content="https://thirdeyegoliath.com/assets/teg-logo-share.png">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R"></script>
@@ -160,7 +160,21 @@ footer .socials{margin-bottom:26px}
   .cd-num{font-size:30px}
   .topnav{gap:14px}
   .topnav a{font-size:10px}
+  .promo-code{font-size:30px;letter-spacing:.12em}
+  .cta{padding:14px 26px;font-size:12px}
 }
+/* ---------- LAUNCH: promo code + shop buttons ---------- */
+.promo{border:2px dashed var(--gold);border-radius:16px;background:rgba(10,6,20,.82);padding:20px 34px;margin:6px 0 28px;
+  box-shadow:0 0 40px rgba(212,169,78,.25)}
+.promo-label{letter-spacing:.35em;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.promo-code{font-family:'Unbounded',sans-serif;font-weight:900;font-size:40px;letter-spacing:.16em;color:var(--gold);text-shadow:0 0 22px rgba(212,169,78,.45)}
+.promo-sub{color:var(--muted);font-size:14px;margin-top:8px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.cta{display:inline-block;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.14em;font-size:13px;text-decoration:none;
+  padding:16px 34px;border-radius:999px;background:var(--gold);color:#050309;transition:all .2s;box-shadow:0 0 26px rgba(212,169,78,.35)}
+.cta:hover{background:var(--violet);color:#fff;box-shadow:0 0 26px rgba(123,47,247,.55)}
+.cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);box-shadow:none}
+.cta.ghost:hover{background:var(--gold);color:#050309}
 </style>
 </head>
 <body>
@@ -186,15 +200,18 @@ footer .socials{margin-bottom:26px}
     <line x1="86" y1="22" x2="78" y2="30"/><line x1="22" y1="70" x2="14" y2="78"/>
   </svg>
   <h1 class="wordmark">THIRD EYE GOLIATH</h1>
-  <div class="tagline">Something epic is rising.</div>
-  <p class="sub">A new vision. A new vibe. A whole new level.<br>Stay aligned. Stay tuned.</p>
+  <div class="tagline">The store is open.</div>
+  <p class="sub">Original gothic-cosmic art on tees, hoodies &amp; tanks.<br>The Goddess Collection and the Halloween Drop are live now.</p>
 
-  <div class="countdown-label">LAUNCHING IN</div>
-  <div class="countdown">
-    <div class="cd-block"><div class="cd-num" id="cd-d">--</div><div class="cd-lab">DAYS</div></div>
-    <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-lab">HOURS</div></div>
-    <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-lab">MINUTES</div></div>
-    <div class="cd-block"><div class="cd-num" id="cd-s">--</div><div class="cd-lab">SECONDS</div></div>
+  <div class="promo" id="promo">
+    <div class="promo-label">LAUNCH DAY ONLY</div>
+    <div class="promo-code">WELCOME10</div>
+    <div class="promo-sub">10% off everything at checkout — today only. Share it with your people.</div>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta" href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener">SHOP NOW</a>
+    <a class="cta ghost" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener">THE HALLOWEEN DROP</a>
   </div>
 
   <div class="email-card">
@@ -216,7 +233,7 @@ footer .socials{margin-bottom:26px}
     <div class="moon-div">☽ ✦ ☾</div>
     <div class="sec-head reveal">
       <h2>VOTE ON DESIGNS</h2>
-      <p>Help choose what drops first. Every vote shapes the launch.</p>
+      <p>Help choose what drops next. Every vote shapes what's coming.</p>
     </div>
     <div class="leader reveal" id="leader">
       <h3 id="leader-title">LOADING VOTES…</h3>
@@ -232,22 +249,22 @@ footer .socials{margin-bottom:26px}
   <div class="wrap">
     <div class="moon-div">☽ ✦ ☾</div>
     <div class="sec-head reveal">
-      <h2>LOCKED &amp; LOADING</h2>
-      <p id="teaser-sub">Two collections. One launch day. Zero spoilers.</p>
+      <h2>NOW LIVE</h2>
+      <p id="teaser-sub">Two collections, open now. Go explore.</p>
     </div>
     <div class="teasers">
-      <div class="teaser t1 reveal" data-link="https://shop.thirdeyegoliath.com/category/goddess">
+      <a class="teaser t1 reveal" href="https://shop.thirdeyegoliath.com/category/goddess" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
-        <div class="lock">🔒</div>
+        <div class="lock">🔓</div>
         <h3>THE GODDESS COLLECTION</h3>
-        <p>UNLOCKS OCTOBER 1ST</p>
-      </div>
-      <div class="teaser t2 reveal" data-link="https://shop.thirdeyegoliath.com/category/halloween">
+        <p>SHOP THE COLLECTION →</p>
+      </a>
+      <a class="teaser t2 reveal" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
-        <div class="lock">🔒</div>
+        <div class="lock">🔓</div>
         <h3>THE HALLOWEEN DROP</h3>
-        <p>UNLOCKS OCTOBER 1ST</p>
-      </div>
+        <p>SHOP THE DROP →</p>
+      </a>
     </div>
   </div>
 </section>
@@ -281,34 +298,13 @@ footer .socials{margin-bottom:26px}
 </footer>
 
 <script>
-// Countdown to Oct 1, 2026 00:00 America/New_York
-const target = new Date('2026-10-01T00:00:00-04:00').getTime();
-function tick(){
-  let d = target - Date.now();
-  if(d < 0) d = 0;
-  const days = Math.floor(d/864e5), h = Math.floor(d/36e5)%24, m = Math.floor(d/6e4)%60, s = Math.floor(d/1e3)%60;
-  document.getElementById('cd-d').textContent = String(days).padStart(2,'0');
-  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+// WELCOME10 box: visible through Oct 1, 2026 11:59 PM Eastern, then hides itself
+const CODE_ENDS = new Date('2026-10-02T00:00:00-04:00').getTime();
+function hidePromoIfExpired(){
+  const p = document.getElementById('promo');
+  if (p && Date.now() >= CODE_ENDS) p.style.display = 'none';
 }
-tick(); setInterval(tick, 1000);
-
-// Locked & Loading cards unlock automatically at launch and link to their Collections pages
-let teasersUnlocked = false;
-function unlockTeasers(){
-  if (teasersUnlocked || Date.now() < target) return;
-  teasersUnlocked = true;
-  const sub = document.getElementById('teaser-sub');
-  if (sub) sub.textContent = 'Both collections are live. Go explore.';
-  document.querySelectorAll('.teaser[data-link]').forEach(t => {
-    t.querySelector('.lock').textContent = '🔓';
-    t.querySelector('p').textContent = 'NOW UNLOCKED — EXPLORE →';
-    t.style.cursor = 'pointer';
-    t.addEventListener('click', () => { location.href = t.dataset.link; });
-  });
-}
-unlockTeasers(); setInterval(unlockTeasers, 1000);
+hidePromoIfExpired(); setInterval(hidePromoIfExpired, 30000);
 
 // ---------- Real voting (same Supabase backend + localStorage key as collections.html) ----------
 const sbClient = supabase.createClient(
