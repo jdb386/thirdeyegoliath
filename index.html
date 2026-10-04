@@ -56,7 +56,7 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-ser
 .hero{
   min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:90px 24px 60px;position:relative;
-  background:url("assets/teg-nebula-bg.png") center/cover no-repeat fixed;
+  background:url("assets/teg-nebula-bg.jpg") center/cover no-repeat fixed;
 }
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,3,9,.55) 0%,rgba(5,3,9,.35) 40%,rgba(5,3,9,.92) 100%)}
 .hero>*{position:relative;z-index:1}
@@ -145,7 +145,7 @@ section{padding:90px 0;position:relative}
   text-align:center;backdrop-filter:blur(8px);transition:transform .2s}
 .tile:hover{transform:translateY(-5px);border-color:var(--teal)}
 .tile .ic{font-size:38px;margin-bottom:16px;display:block}
-.tile h4{font-family:'Unbounded',sans-serif;font-size:15px;letter-spacing:.1em;margin-bottom:12px;color:#fff}
+.tile h3{font-family:'Unbounded',sans-serif;font-size:15px;letter-spacing:.1em;margin-bottom:12px;color:#fff}
 .tile p{color:var(--muted);font-size:14.5px;line-height:1.6}
 
 /* footer */
@@ -189,6 +189,7 @@ footer .socials{margin-bottom:26px}
   <a href="collections.html">COLLECTIONS</a>
   <a href="contact.html">CONTACT</a>
 </nav>
+<main>
 
 <!-- ============ HERO ============ -->
 <div class="hero">
@@ -280,9 +281,9 @@ footer .socials{margin-bottom:26px}
       <p>Not merch. A movement.</p>
     </div>
     <div class="tiles">
-      <div class="tile reveal"><span class="ic">⚡</span><h4>LIMITED DROPS</h4><p>Each collection is available for a limited run, then retired for good.</p></div>
-      <div class="tile reveal"><span class="ic">👕</span><h4>PRINTED TO ORDER</h4><p>Premium print-on-demand on soft, heavyweight blanks. No fast-fashion waste.</p></div>
-      <div class="tile reveal"><span class="ic">🌌</span><h4>WEAR THE WEIRD</h4><p>Made for the dark, the cosmic, and the strange. Dreamers, rebels, visionaries.</p></div>
+      <div class="tile reveal"><span class="ic">⚡</span><h3>LIMITED DROPS</h3><p>Each collection is available for a limited run, then retired for good.</p></div>
+      <div class="tile reveal"><span class="ic">👕</span><h3>PRINTED TO ORDER</h3><p>Premium print-on-demand on soft, heavyweight blanks. No fast-fashion waste.</p></div>
+      <div class="tile reveal"><span class="ic">🌌</span><h3>WEAR THE WEIRD</h3><p>Made for the dark, the cosmic, and the strange. Dreamers, rebels, visionaries.</p></div>
     </div>
   </div>
 </section>
@@ -291,9 +292,11 @@ footer .socials{margin-bottom:26px}
 <!-- ============ SHOP SMALL ============ -->
 <section style="padding:20px 0 70px">
   <div class="wrap">
-    <img src="assets/shop-small-banner-wide.png" alt="Shop Small - original cosmic art, designed by Lisa in North Carolina. Small-batch, printed to order. When you support a small business, you support a dream." style="display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;border-radius:14px;box-shadow:0 0 44px rgba(212,169,78,.15)" loading="lazy">
+    <img src="assets/shop-small-banner-wide.jpg" width="1600" height="500" alt="Shop Small - original cosmic art, designed by Lisa in North Carolina. Small-batch, printed to order. When you support a small business, you support a dream." style="display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;border-radius:14px;box-shadow:0 0 44px rgba(212,169,78,.15)" loading="lazy">
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="moon-div">☽ ☾ ☽</div>
@@ -357,7 +360,7 @@ function renderCards(){
     const choice = voted[r.design_id];
     const dis = choice ? "disabled" : "";
     return '<div class="dcard reveal in">' +
-      '<div class="dart"><img src="assets/collections/' + r.design_id + '" alt="' + prettyName(r.design_id) + '">' +
+      '<div class="dart"><img src="assets/collections/thumbs/' + r.design_id.replace(/\.(png|jpe?g)$/i, '.jpg') + '" width="480" height="480" loading="lazy" alt="' + prettyName(r.design_id) + '">' +
       (i === 0 ? '<div class="badge">CURRENT LEADER</div>' : '') + '</div>' +
       '<div class="dbody"><h4>' + prettyName(r.design_id) + '</h4><div class="votes">' +
       '<button class="vote up' + (choice === "up" ? " voted" : "") + '" data-id="' + r.design_id + '" data-type="up" ' + dis + '>👍 <b>' + r.up_count + '</b></button>' +

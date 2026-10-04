@@ -34,7 +34,7 @@
   :root { --bg:#050309; --violet:#7b2ff7; --lav:#a855f7; --teal:#2dd4bf; --gold:#d4a94e; --text:#f5f0ff; --muted:#b8a8d8; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url('assets/teg-nebula-bg.png') center/cover no-repeat fixed;
+    background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url('assets/teg-nebula-bg.jpg') center/cover no-repeat fixed;
     background-color:var(--bg);
     font-family:'Space Grotesk', sans-serif;
     color:var(--text); min-height:100vh; overflow-x:hidden;
@@ -388,7 +388,7 @@ function render(cat) {
     card.className = "grid-card";
     card.dataset.design = name;
     card.innerHTML = `
-      <img src="assets/collections/${name}" loading="lazy" alt="">
+      <img src="assets/collections/thumbs/${name.replace(/\.(png|jpe?g)$/i, '.jpg')}" width="480" height="480" loading="lazy" alt="${name}">
       <div class="grid-votes">
         <button class="vote-btn small grid-vote-btn" type="button" data-vote="up">👍 <span class="grid-up-count">0</span></button>
         <button class="vote-btn small grid-vote-btn" type="button" data-vote="down">👎 <span class="grid-down-count">0</span></button>
