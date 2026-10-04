@@ -21,6 +21,11 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
 <style>
+/* Fallback fonts sized to match Unbounded / Space Grotesk, so text doesn't jump when the brand fonts finish loading (prevents layout shift). Measurements taken from the real font files. */
+@font-face{font-family:'Unbounded Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans'),local('Roboto');font-weight:100 600;size-adjust:123.85%;ascent-override:80.34%;descent-override:19.78%;line-gap-override:0%}
+@font-face{font-family:'Unbounded Fallback';src:local('Arial Bold'),local('Arial-BoldMT'),local('Liberation Sans Bold'),local('Roboto Bold');font-weight:700;size-adjust:125.01%;ascent-override:79.60%;descent-override:19.60%;line-gap-override:0%}
+@font-face{font-family:'Unbounded Fallback';src:local('Arial Bold'),local('Arial-BoldMT'),local('Liberation Sans Bold'),local('Roboto Bold');font-weight:800 900;size-adjust:127.63%;ascent-override:77.96%;descent-override:19.20%;line-gap-override:0%}
+@font-face{font-family:'Space Grotesk Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans'),local('Roboto');size-adjust:108.52%;ascent-override:90.67%;descent-override:26.91%;line-gap-override:0%}
 :root{
   --bg:#050309; --violet:#7b2ff7; --lav:#a855f7;
   --teal:#2dd4bf; --gold:#d4a94e; --text:#f5f0ff; --muted:#b8a8d8;
@@ -28,14 +33,14 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url("assets/teg-nebula-bg.jpg") center/cover no-repeat fixed;
-  background-color:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;min-height:100vh}
+  background-color:var(--bg);color:var(--text);font-family:'Space Grotesk','Space Grotesk Fallback',sans-serif;overflow-x:hidden;min-height:100vh}
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 .topnav{position:relative;z-index:5;display:flex;justify-content:center;gap:28px;padding:22px 16px;flex-wrap:wrap}
-.topnav a{color:var(--muted);text-decoration:none;font-family:'Unbounded',sans-serif;font-size:12px;letter-spacing:.18em;transition:color .2s}
+.topnav a{color:var(--muted);text-decoration:none;font-family:'Unbounded','Unbounded Fallback',sans-serif;font-size:12px;letter-spacing:.18em;transition:color .2s}
 .topnav a:hover,.topnav a.active{color:var(--gold)}
 
 .page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:60px 24px 40px;text-align:center}
-.page h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(26px,5vw,44px);letter-spacing:.05em;margin-bottom:14px;
+.page h1{font-family:'Unbounded','Unbounded Fallback',sans-serif;font-weight:900;font-size:clamp(26px,5vw,44px);letter-spacing:.05em;margin-bottom:14px;
   background:linear-gradient(100deg,#fff,var(--lav));-webkit-background-clip:text;background-clip:text;color:transparent}
 .page .lead{color:var(--muted);font-size:17px;margin-bottom:40px}
 .moon-div{text-align:center;color:var(--gold);letter-spacing:.8em;font-size:20px;margin:0 0 30px;opacity:.8}
@@ -45,7 +50,7 @@ body{
   backdrop-filter:blur(8px);display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
 .pol:hover{transform:translateY(-4px);border-color:var(--gold)}
 .pol .ic{font-size:28px;margin-bottom:12px}
-.pol h2{font-family:'Unbounded',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--gold);margin-bottom:12px}
+.pol h2{font-family:'Unbounded','Unbounded Fallback',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--gold);margin-bottom:12px}
 .pol p{color:var(--text);font-size:15px;line-height:1.65;margin-bottom:18px;flex:1}
 .pol a.full{color:var(--gold);text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.04em;border-bottom:1px solid var(--gold);align-self:flex-start;padding-bottom:2px}
 .pol a.full:hover{color:var(--teal);border-color:var(--teal)}
@@ -85,7 +90,7 @@ footer .socials{margin-bottom:26px}
        style="display:block;width:100%;max-width:640px;height:auto;margin:0 auto;border-radius:12px;box-shadow:0 0 44px rgba(212,169,78,.15)">
 
   <p class="help">Tip: lay a shirt you already love flat, measure it, and match it to the chart. Questions? Email <a href="mailto:thirdeyegoliath@gmail.com">thirdeyegoliath@gmail.com</a>.</p>
-  <p class="help" style="margin-top:22px"><a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener" style="display:inline-block;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.14em;font-size:13px;text-decoration:none;padding:15px 34px;border-radius:999px;background:#d4a94e;color:#050309">SHOP NOW</a></p>
+  <p class="help" style="margin-top:22px"><a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener" style="display:inline-block;font-family:'Unbounded','Unbounded Fallback',sans-serif;font-weight:700;letter-spacing:.14em;font-size:13px;text-decoration:none;padding:15px 34px;border-radius:999px;background:#d4a94e;color:#050309">SHOP NOW</a></p>
 </main>
 
 <footer>
