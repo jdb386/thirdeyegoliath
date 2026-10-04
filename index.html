@@ -36,7 +36,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
 <style>
 :root{
   --bg:#050309; --indigo:#1a0f2e; --violet:#7b2ff7; --lav:#a855f7;
@@ -421,5 +422,19 @@ sizeCanvas(); addEventListener('resize', sizeCanvas);
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
-</body>
+<script>
+// Accessibility: MailerLite's signup form uses <h4> headings, which skips heading levels after the page's <h1>.
+// Label them as level 2 for screen readers (no visual change). Runs once the form has loaded.
+(function () {
+  function fix() {
+    document.querySelectorAll('.ml-embedded h1, .ml-embedded h2, .ml-embedded h3, .ml-embedded h4, .ml-embedded h5, .ml-embedded h6').forEach(function (h) {
+      if (!h.hasAttribute('aria-level')) { h.setAttribute('role', 'heading'); h.setAttribute('aria-level', '2'); }
+    });
+  }
+  fix();
+  var mo = new MutationObserver(fix);
+  mo.observe(document.body, { childList: true, subtree: true });
+  setTimeout(function () { mo.disconnect(); }, 20000);
+})();
+</script></body>
 </html>
