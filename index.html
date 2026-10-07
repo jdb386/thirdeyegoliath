@@ -213,7 +213,16 @@ footer .socials{margin-bottom:26px}
   <div class="tagline">The store is open.</div>
   <p class="sub">Original gothic-cosmic art on tees, hoodies &amp; tanks.<br>The Goddess Collection and the Halloween Drop are live now.</p>
 
-  <div class="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween.</div>
+  <div class="ship-note" id="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween.</div>
+  <script>
+    /* Halloween order-by passed: switches automatically at 12:00 AM Eastern on Oct 17 (added Oct 7) */
+    (function () {
+      if (Date.now() >= Date.parse('2026-10-17T00:00:00-04:00')) {
+        var n = document.getElementById('ship-note');
+        if (n) n.textContent = '✦ Orders placed after October 16 may not arrive by Halloween.';
+      }
+    })();
+  </script>
 
   <div class="promo" id="promo">
     <div class="promo-label">SUPPORT AN INDEPENDENT BRAND</div>
