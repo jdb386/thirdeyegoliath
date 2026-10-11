@@ -410,12 +410,12 @@ function render(cat) {
     return;
   }
   const images = cat === "featured" ? data.images.filter(n => !isLockedImage(n)) : data.images;
-  images.forEach(name => {
+  images.forEach((name, i) => {
     const card = document.createElement("div");
     card.className = "grid-card";
     card.dataset.design = name;
     card.innerHTML = `
-      <img src="assets/collections/thumbs/${name.replace(/\.(png|jpe?g)$/i, '.jpg')}" width="480" height="480" loading="lazy" alt="${name}">
+      <img src="assets/collections/thumbs/${name.replace(/\.(png|jpe?g)$/i, '.jpg')}" width="480" height="480" ${i < 4 ? (i === 0 ? 'fetchpriority="high"' : '') : 'loading="lazy"'} alt="${name}">
       <div class="grid-votes">
         <button class="vote-btn small grid-vote-btn" type="button" data-vote="up">👍 <span class="grid-up-count">0</span></button>
         <button class="vote-btn small grid-vote-btn" type="button" data-vote="down">👎 <span class="grid-down-count">0</span></button>
