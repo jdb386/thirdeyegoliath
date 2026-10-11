@@ -25,15 +25,11 @@
   gtag('js', new Date());
   gtag('config', 'G-ZP7ZBNHE8R');
 </script>
-<!-- MailerLite Universal -->
+<!-- MailerLite Universal: the script itself is loaded lazily at the bottom of the page (when the signup form gets close, or 8s after load), so it doesn't slow the first paint on phones. ml() calls queue up until then. -->
 <script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    window.ml=window.ml||function(){(window.ml.q=window.ml.q||[]).push(arguments);};
     ml('account', '2560274');
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preload" href="assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -64,7 +60,10 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk','Space G
   min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:90px 24px 60px;position:relative;
   background:url("assets/teg-nebula-bg.jpg") center/cover no-repeat fixed;
+  background-image:image-set(url("assets/teg-nebula-bg.webp") type("image/webp"),url("assets/teg-nebula-bg.jpg") type("image/jpeg"));
 }
+/* Phones: a fixed background repaints on every scroll frame; scroll with the page instead (looks the same, much smoother). */
+@media(max-width:760px){.hero{background-attachment:scroll}}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,3,9,.55) 0%,rgba(5,3,9,.35) 40%,rgba(5,3,9,.92) 100%)}
 .hero>*{position:relative;z-index:1}
 .eyebrow{letter-spacing:.45em;font-size:13px;color:var(--gold);font-weight:700;margin-bottom:26px}
@@ -324,7 +323,10 @@ footer .socials{margin-bottom:26px}
 <!-- ============ SHOP SMALL ============ -->
 <section style="padding:20px 0 70px">
   <div class="wrap">
+    <picture>
+    <source type="image/webp" srcset="assets/shop-small-banner-wide-800.webp 800w, assets/shop-small-banner-wide-1600.webp 1600w" sizes="(max-width:1148px) calc(100vw - 48px), 1100px">
     <img src="assets/shop-small-banner-wide.jpg" width="1600" height="500" alt="Shop Small - original cosmic art, designed by Lisa in North Carolina. Small-batch, printed to order. When you support a small business, you support a dream." style="display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;border-radius:14px;box-shadow:0 0 44px rgba(212,169,78,.15)" loading="lazy">
+    </picture>
   </div>
 </section>
 
@@ -363,10 +365,28 @@ footer .socials{margin-bottom:26px}
 
 <script>
 // ---------- Real voting (same Supabase backend + localStorage key as collections.html) ----------
-const sbClient = supabase.createClient(
-  "https://wuewmtmmcqxxqftnapdu.supabase.co",
-  "sb_publishable_3PW24OqcikZGlJI_6m5U1g_cnpcdek9"
-);
+// Speed: the Supabase library (~56 KB) and the MailerLite form script are only loaded when their section
+// is getting close on screen, so they never hold up the first paint on phones.
+function loadScript(src){ return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.async = true; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+function whenNear(el, fn, margin){
+  let done = false; const go = () => { if (!done) { done = true; fn(); } };
+  if (!("IntersectionObserver" in window)) { addEventListener("load", go); return go; }
+  const ob = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { ob.disconnect(); go(); } }, { rootMargin: margin || "800px 0px" });
+  ob.observe(el); return go;
+}
+let sbClient = null;
+whenNear(document.getElementById("leader"), async () => {
+  try {
+    await loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2");
+    sbClient = supabase.createClient(
+      "https://wuewmtmmcqxxqftnapdu.supabase.co",
+      "sb_publishable_3PW24OqcikZGlJI_6m5U1g_cnpcdek9"
+    );
+    loadVotes();
+  } catch (e) { document.getElementById("leader-title").textContent = "VOTING OPENS SOON"; }
+});
+const loadMailerLite = whenNear(document.querySelector(".ml-embedded"), () => loadScript("https://assets.mailerlite.com/js/universal.js"), "1200px 0px");
+addEventListener("load", () => setTimeout(loadMailerLite, 8000));
 const VOTE_STORAGE_KEY = "teg_voted_designs";
 function getVoted(){ try { return JSON.parse(localStorage.getItem(VOTE_STORAGE_KEY) || "{}"); } catch(e){ return {}; } }
 function rememberVote(id, type){ const v = getVoted(); v[id] = type; localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(v)); }
