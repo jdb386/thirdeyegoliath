@@ -17,13 +17,16 @@
 <meta name="twitter:title" content="Third Eye Goliath">
 <meta name="twitter:description" content="Third Eye Goliath — cosmic streetwear. Wear the weird. Now open — original gothic-cosmic art on tees, hoodies &amp; tanks.">
 <meta name="twitter:image" content="https://thirdeyegoliath.com/assets/teg-logo-share.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R"></script>
+<!-- Google tag (gtag.js): the pageview is queued right away, but the 178 KB script loads only after the page has finished loading, so it doesn't slow the first paint on phones. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-ZP7ZBNHE8R');
+  addEventListener('load', function () {
+    var go = function () { var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R'; document.head.appendChild(s); };
+    if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 2000 }); else setTimeout(go, 1);
+  });
 </script>
 <!-- MailerLite Universal: the script itself is loaded lazily at the bottom of the page (when the signup form gets close, or 8s after load), so it doesn't slow the first paint on phones. ml() calls queue up until then. -->
 <script>
