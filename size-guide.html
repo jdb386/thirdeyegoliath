@@ -9,18 +9,23 @@
 <link rel="icon" href="assets/favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R"></script>
+<!-- Google tag (gtag.js): the pageview is queued right away, but the 178 KB script loads only after the page has finished loading, so it doesn't slow the first paint on phones. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-ZP7ZBNHE8R');
+  addEventListener('load', function () {
+    var go = function () { var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZP7ZBNHE8R'; document.head.appendChild(s); };
+    if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 2000 }); else setTimeout(go, 1);
+  });
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap"></noscript>
+<link rel="preload" href="assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Brand fonts are self-hosted and preloaded. font-display:optional means text never re-flows when a font arrives late (stops mobile layout shift). */
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:optional;src:url(assets/fonts/unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:optional;src:url(assets/fonts/space-grotesk-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Fallback fonts sized to match Unbounded / Space Grotesk, so text doesn't jump when the brand fonts finish loading (prevents layout shift). Measurements taken from the real font files. */
 @font-face{font-family:'Unbounded Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans'),local('Roboto');font-weight:100 600;size-adjust:123.85%;ascent-override:80.34%;descent-override:19.78%;line-gap-override:0%}
 @font-face{font-family:'Unbounded Fallback';src:local('Arial Bold'),local('Arial-BoldMT'),local('Liberation Sans Bold'),local('Roboto Bold');font-weight:700;size-adjust:125.01%;ascent-override:79.60%;descent-override:19.60%;line-gap-override:0%}
@@ -33,6 +38,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   background:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),url("assets/teg-nebula-bg.jpg") center/cover no-repeat fixed;
+    background-image:linear-gradient(rgba(5,3,9,.6),rgba(5,3,9,.85)),image-set(url("assets/teg-nebula-bg.webp") type("image/webp"),url("assets/teg-nebula-bg.jpg") type("image/jpeg"));
   background-color:var(--bg);color:var(--text);font-family:'Space Grotesk','Space Grotesk Fallback',sans-serif;overflow-x:hidden;min-height:100vh}
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 .topnav{position:relative;z-index:5;display:flex;justify-content:center;gap:28px;padding:22px 16px;flex-wrap:wrap}
@@ -85,9 +91,9 @@ footer .socials{margin-bottom:26px}
   <p class="lead">Every piece is printed to order, so take a minute to find your fit. Measurements come from each garment maker's own spec sheet.</p>
   <div class="moon-div">☽ ✦ ☾</div>
 
-  <img src="assets/size-guide.jpg" width="1080" height="2598"
+  <picture><source type="image/webp" srcset="assets/size-guide-720.webp 720w, assets/size-guide-1080.webp 1080w" sizes="(max-width:688px) calc(100vw - 48px), 640px"><img src="assets/size-guide.jpg" width="1080" height="2598"
        alt="Size guide. Premium Tee (Bella+Canvas 3001), chest width by length in inches: XS 16.5 by 27, S 18 by 28, M 20 by 29, L 22 by 30, XL 24 by 31, 2XL 26 by 32, 3XL 28 by 33, 4XL 30 by 34, 5XL 32 by 35. Classic Tee (Gildan Softstyle 64000): S 18 by 28, M 20 by 29.25, L 22 by 30.25, XL 24 by 31.25, 2XL 26 by 32.5, 3XL 28 by 33.5. Pullover Hoodie (Cotton Heritage M2580), runs small, order one size up: S 20 by 27, M 21 by 28, L 23 by 29, XL 25 by 30, 2XL 26.5 by 31, 3XL 28 by 32. Racerback Tank (Next Level 1533), women's fitted cut: XS 14 by 27, S 15 by 27.5, M 16 by 28, L 17 by 28.5, XL 18 by 29, 2XL 19 by 29.5."
-       style="display:block;width:100%;max-width:640px;height:auto;margin:0 auto;border-radius:12px;box-shadow:0 0 44px rgba(212,169,78,.15)">
+       style="display:block;width:100%;max-width:640px;height:auto;margin:0 auto;border-radius:12px;box-shadow:0 0 44px rgba(212,169,78,.15)"></picture>
 
   <p class="help">Tip: lay a shirt you already love flat, measure it, and match it to the chart. Questions? Email <a href="mailto:thirdeyegoliath@gmail.com">thirdeyegoliath@gmail.com</a>.</p>
   <p class="help" style="margin-top:22px"><a href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener" style="display:inline-block;font-family:'Unbounded','Unbounded Fallback',sans-serif;font-weight:700;letter-spacing:.14em;font-size:13px;text-decoration:none;padding:15px 34px;border-radius:999px;background:#d4a94e;color:#050309">SHOP NOW</a></p>
