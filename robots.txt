@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /success.html
+Disallow: /preview-home.html
 
 Sitemap: https://thirdeyegoliath.com/sitemap.xml
