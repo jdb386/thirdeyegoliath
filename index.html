@@ -141,6 +141,10 @@ section{padding:90px 0;position:relative}
 .teaser .blurbg{position:absolute;inset:0;filter:blur(26px) brightness(.7);transform:scale(1.15)}
 .teaser.t1 .blurbg{background:radial-gradient(circle at 50% 40%,#5b2a86,#150a24 75%)}
 .teaser.t2 .blurbg{background:radial-gradient(circle at 50% 40%,#b4551e,#1c0d05 75%)}
+.teaser.t3 .blurbg{background:radial-gradient(circle at 50% 40%,#2f7a3a,#06140a 75%)}
+.teaser .tdesc{color:var(--text);font-size:15px;line-height:1.55;max-width:300px;margin:0 auto 16px;opacity:.9}
+.why{max-width:760px;margin:0 auto;background:rgba(26,15,46,.6);border:1px solid rgba(168,85,247,.3);border-radius:18px;padding:32px 30px;text-align:center;backdrop-filter:blur(8px)}
+.why p{color:var(--text);font-size:17px;line-height:1.7}
 .teaser>*:not(.blurbg){position:relative;z-index:1}
 .lock{font-size:44px;margin-bottom:16px;filter:drop-shadow(0 0 14px rgba(212,169,78,.6))}
 .teaser h3{font-family:'Unbounded','Unbounded Fallback',sans-serif;font-size:22px;letter-spacing:.06em;margin-bottom:10px}
@@ -211,16 +215,23 @@ footer .socials{margin-bottom:26px}
     <line x1="86" y1="22" x2="78" y2="30"/><line x1="22" y1="70" x2="14" y2="78"/>
   </svg>
   <h1 class="wordmark">THIRD EYE GOLIATH</h1>
-  <div class="tagline">The store is open.</div>
-  <p class="sub">Original gothic-cosmic art on tees, hoodies &amp; tanks.<br>The Goddess Collection and the Halloween Drop are live now.</p>
+  <div class="tagline">Cosmic streetwear for the weird ones.</div>
+  <p class="sub">Designed by hand, printed to order, made for people who look at the night sky and feel at home.</p>
 
   <div class="ship-note" id="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween.</div>
   <script>
-    /* Halloween order-by passed: switches automatically at 12:00 AM Eastern on Oct 17 (added Oct 7) */
+    /* Hero notice switches on its own (Eastern time):
+       through Oct 16  -> Halloween order-by notice (text above)
+       Oct 17 - Oct 31 -> Christmas teaser (PLACEHOLDER copy - final wording coming from Jim & Lisa)
+       Nov 1 onward    -> Christmas banner (PLACEHOLDER copy - final wording coming from Jim & Lisa) */
     (function () {
-      if (Date.now() >= Date.parse('2026-10-17T00:00:00-04:00')) {
-        var n = document.getElementById('ship-note');
-        if (n) n.textContent = '✦ Orders placed after October 16 may not arrive by Halloween.';
+      var n = document.getElementById('ship-note');
+      if (!n) return;
+      var now = Date.now();
+      if (now >= Date.parse('2026-11-01T00:00:00-04:00')) {
+        n.textContent = '✦ Christmas just got otherworldly.';
+      } else if (now >= Date.parse('2026-10-17T00:00:00-04:00')) {
+        n.textContent = '✦ Something otherworldly is coming — Nov 1.';
       }
     })();
   </script>
@@ -236,11 +247,6 @@ footer .socials{margin-bottom:26px}
     <a class="cta ghost" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener">THE HALLOWEEN DROP</a>
   </div>
 
-  <div class="email-card">
-    <div class="ml-embedded" data-form="dzgRof"></div>
-    <div class="micro">No spam. Just the drop.</div>
-  </div>
-
   <div class="socials">
     <a class="soc" href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener">Instagram · @thirdeyegoliath</a>
     <a class="soc" href="https://www.facebook.com/share/1DHixhSDpo/" target="_blank" rel="noopener">Facebook</a>
@@ -248,6 +254,19 @@ footer .socials{margin-bottom:26px}
     <a class="soc" href="https://x.com/ThirdEyeGoliath" target="_blank" rel="noopener">X</a>
   </div>
 </div>
+
+<!-- ============ WHY BUY FROM US ============ -->
+<section>
+  <div class="wrap">
+    <div class="moon-div">☽ ✦ ☾</div>
+    <div class="sec-head reveal">
+      <h2>WHY BUY FROM US</h2>
+    </div>
+    <div class="why reveal">
+      <p>Every design starts as original art — no templates, no clip art, no mass-produced blanks with a logo slapped on. Printed to order on soft, premium tees, hoodies, and tanks.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ============ VOTE (live Supabase) ============ -->
 <section>
@@ -272,37 +291,30 @@ footer .socials{margin-bottom:26px}
     <div class="moon-div">☽ ✦ ☾</div>
     <div class="sec-head reveal">
       <h2>NOW LIVE</h2>
-      <p id="teaser-sub">Two collections, open now. Go explore.</p>
+      <p id="teaser-sub">Three collections, open now. Go explore.</p>
     </div>
     <div class="teasers">
       <a class="teaser t1 reveal" href="https://shop.thirdeyegoliath.com/category/goddess" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
         <div class="lock">🔓</div>
         <h3>THE GODDESS COLLECTION</h3>
+        <div class="tdesc">Six goddesses, six moods. Dark divine feminine energy on soft tees, tanks, and hoodies.</div>
         <p>SHOP THE COLLECTION →</p>
       </a>
       <a class="teaser t2 reveal" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
         <div class="lock">🔓</div>
         <h3>THE HALLOWEEN DROP</h3>
+        <div class="tdesc">Cosmic horror meets streetwear. Limited run, gone after the season.</div>
         <p>SHOP THE DROP →</p>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHAT TO EXPECT ============ -->
-<section>
-  <div class="wrap">
-    <div class="moon-div">☽ ✦ ☾</div>
-    <div class="sec-head reveal">
-      <h2>WHAT TO EXPECT</h2>
-      <p>Not merch. A movement.</p>
-    </div>
-    <div class="tiles">
-      <div class="tile reveal"><span class="ic">⚡</span><h3>LIMITED DROPS</h3><p>Each collection is available for a limited run, then retired for good.</p></div>
-      <div class="tile reveal"><span class="ic">👕</span><h3>PRINTED TO ORDER</h3><p>Premium print-on-demand on soft, heavyweight blanks. No fast-fashion waste.</p></div>
-      <div class="tile reveal"><span class="ic">🌌</span><h3>WEAR THE WEIRD</h3><p>Made for the dark, the cosmic, and the strange. Dreamers, rebels, visionaries.</p></div>
+      <a class="teaser t3 reveal" href="https://shop.thirdeyegoliath.com/category/zombie-bro" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <div class="blurbg"></div>
+        <div class="lock">🔓</div>
+        <h3>ZOMBIE BRO</h3>
+        <div class="tdesc">Seven designs, always available. Our signature collection, here to stay.</div>
+        <p>SHOP ZOMBIE BRO →</p>
+      </a>
     </div>
   </div>
 </section>
@@ -312,6 +324,16 @@ footer .socials{margin-bottom:26px}
 <section style="padding:20px 0 70px">
   <div class="wrap">
     <img src="assets/shop-small-banner-wide.jpg" width="1600" height="500" alt="Shop Small - original cosmic art, designed by Lisa in North Carolina. Small-batch, printed to order. When you support a small business, you support a dream." style="display:block;width:100%;max-width:1100px;height:auto;margin:0 auto;border-radius:14px;box-shadow:0 0 44px rgba(212,169,78,.15)" loading="lazy">
+  </div>
+</section>
+
+<!-- ============ EMAIL SIGNUP (bottom of page) ============ -->
+<section style="padding:0 0 70px">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div class="email-card" style="margin-bottom:0">
+      <div class="ml-embedded" data-form="dzgRof"></div>
+      <div class="micro">No spam. Just the drop.</div>
+    </div>
   </div>
 </section>
 
@@ -339,14 +361,6 @@ footer .socials{margin-bottom:26px}
 </footer>
 
 <script>
-// WELCOME10 box: visible through Oct 1, 2026 11:59 PM Eastern, then hides itself
-const CODE_ENDS = new Date('2026-10-02T00:00:00-04:00').getTime();
-function hidePromoIfExpired(){
-  const p = document.getElementById('promo');
-  if (p && Date.now() >= CODE_ENDS) p.style.display = 'none';
-}
-hidePromoIfExpired(); setInterval(hidePromoIfExpired, 30000);
-
 // ---------- Real voting (same Supabase backend + localStorage key as collections.html) ----------
 const sbClient = supabase.createClient(
   "https://wuewmtmmcqxxqftnapdu.supabase.co",
