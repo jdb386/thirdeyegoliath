@@ -188,7 +188,8 @@ footer .socials{margin-bottom:26px}
 .cta:hover{background:var(--violet);color:#fff;box-shadow:0 0 26px rgba(123,47,247,.55)}
 .cta.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);box-shadow:none}
 .cta.ghost:hover{background:var(--gold);color:#050309}
-.ship-note{display:inline-block;max-width:520px;border:1px solid rgba(212,169,78,.55);border-radius:16px;background:rgba(10,6,20,.82);color:var(--gold);font-weight:700;font-size:15px;letter-spacing:.04em;line-height:1.45;padding:12px 22px;margin:0 0 26px;box-shadow:0 0 28px rgba(212,169,78,.18)}
+.ship-note{display:inline-block;max-width:calc(100vw - 48px);white-space:nowrap;border:1px solid rgba(212,169,78,.55);border-radius:16px;background:rgba(10,6,20,.82);color:var(--gold);font-weight:700;font-size:15px;letter-spacing:.04em;line-height:1.45;padding:12px 22px;margin:0 0 26px;box-shadow:0 0 28px rgba(212,169,78,.18)}
+@media(max-width:760px){.ship-note{white-space:normal}}
 </style>
 </head>
 <body>
@@ -218,7 +219,7 @@ footer .socials{margin-bottom:26px}
   <div class="tagline">Cosmic streetwear for the weird ones.</div>
   <p class="sub">Designed by hand, printed to order, made for people who look at the night sky and feel at home.</p>
 
-  <div class="ship-note" id="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween.</div>
+  <div class="ship-note" id="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween. ✦</div>
   <script>
     /* Hero notice switches on its own (Eastern time):
        through Oct 16  -> Halloween order-by notice (text above)
@@ -229,9 +230,9 @@ footer .socials{margin-bottom:26px}
       if (!n) return;
       var now = Date.now();
       if (now >= Date.parse('2026-11-01T00:00:00-04:00')) {
-        n.textContent = '✦ Christmas just got otherworldly.';
+        n.textContent = '✦ Christmas just got otherworldly. ✦';
       } else if (now >= Date.parse('2026-10-17T00:00:00-04:00')) {
-        n.textContent = '✦ Something otherworldly is coming — Nov 1.';
+        n.textContent = '✦ Something otherworldly is coming — Nov 1. ✦';
       }
     })();
   </script>
