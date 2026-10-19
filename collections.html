@@ -69,7 +69,7 @@
   .sidebar a:hover { color:var(--teal); border-left-color:var(--teal); background:rgba(255,255,255,0.04); }
   .sidebar a.current { color:var(--gold); border-left-color:var(--gold); background:rgba(212,169,78,0.08); }
   .content { flex:1; }
-  .content h2 { font-family:'Unbounded','Unbounded Fallback',sans-serif; font-weight:900; letter-spacing:.05em; margin-bottom:8px;
+  .content h1, .content h2 { font-family:'Unbounded','Unbounded Fallback',sans-serif; font-size:24px; font-weight:900; letter-spacing:.05em; margin-bottom:8px;
     background:linear-gradient(100deg,#fff,var(--lav)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .content .sub { color:var(--muted); font-size:14px; margin-bottom:26px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:16px; }
@@ -129,7 +129,7 @@
       border-left:none; border-bottom-color:var(--gold);
     }
     .grid { grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:10px; }
-    .content h2 { font-size:20px; }
+    .content h1, .content h2 { font-size:20px; }
     #lightbox { padding:16px; }
     #lightbox .close { top:10px; right:16px; font-size:38px; }
   }
@@ -173,7 +173,7 @@
   </aside>
 
   <main class="content">
-    <h2 id="catTitle">FEATURED</h2>
+    <h1 id="catTitle">FEATURED</h1>
     <p class="sub" id="catSub">A selection from across the collections — pick a category on the left to see more.</p>
     <div class="grid" id="gallery"></div>
   </main>
