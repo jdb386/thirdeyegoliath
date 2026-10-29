@@ -143,6 +143,7 @@ section{padding:90px 0;position:relative}
 .teaser .blurbg{position:absolute;inset:0;filter:blur(26px) brightness(.7);transform:scale(1.15)}
 .teaser.t1 .blurbg{background:radial-gradient(circle at 50% 40%,#5b2a86,#150a24 75%)}
 .teaser.t2 .blurbg{background:radial-gradient(circle at 50% 40%,#b4551e,#1c0d05 75%)}
+.teaser.t2.xmas .blurbg{background:radial-gradient(circle at 50% 40%,#8a1c2b,#06140a 75%)}
 .teaser.t3 .blurbg{background:radial-gradient(circle at 50% 40%,#2f7a3a,#06140a 75%)}
 .teaser .tdesc{color:var(--text);font-size:15px;line-height:1.55;max-width:300px;margin:0 auto 16px;opacity:.9}
 .why{max-width:760px;margin:0 auto;background:rgba(26,15,46,.6);border:1px solid rgba(168,85,247,.3);border-radius:18px;padding:32px 30px;text-align:center;backdrop-filter:blur(8px)}
@@ -222,22 +223,17 @@ footer .socials{margin-bottom:26px}
   </svg>
   <h1 class="wordmark">THIRD EYE GOLIATH</h1>
   <div class="tagline">Cosmic streetwear for the weird ones.</div>
-  <p class="sub">Designed by hand, printed to order, made for people who look at the night sky and feel at home.</p>
+  <p class="sub">Original designs, printed to order, made for people who look at the night sky and feel at home.</p>
 
-  <div class="ship-note" id="ship-note">✦ Halloween orders: order by October 16 for arrival before Halloween. ✦</div>
+  <div class="ship-note" id="ship-note">✦ Something otherworldly is coming — Nov 1. ✦</div>
   <script>
     /* Hero notice switches on its own (Eastern time):
-       through Oct 16  -> Halloween order-by notice (text above)
-       Oct 17 - Oct 31 -> Christmas teaser (PLACEHOLDER copy - final wording coming from Jim & Lisa)
-       Nov 1 onward    -> Christmas banner (PLACEHOLDER copy - final wording coming from Jim & Lisa) */
+       through Oct 31 -> Christmas teaser (text above, PLACEHOLDER copy)
+       Nov 1 onward   -> Christmas banner (PLACEHOLDER copy - final wording coming from Jim & Lisa) */
     (function () {
       var n = document.getElementById('ship-note');
-      if (!n) return;
-      var now = Date.now();
-      if (now >= Date.parse('2026-11-01T00:00:00-04:00')) {
+      if (n && Date.now() >= Date.parse('2026-11-01T00:00:00-04:00')) {
         n.textContent = '✦ Christmas just got otherworldly. ✦';
-      } else if (now >= Date.parse('2026-10-17T00:00:00-04:00')) {
-        n.textContent = '✦ Something otherworldly is coming — Nov 1. ✦';
       }
     })();
   </script>
@@ -250,8 +246,18 @@ footer .socials{margin-bottom:26px}
 
   <div class="cta-row">
     <a class="cta" href="https://shop.thirdeyegoliath.com" target="_blank" rel="noopener">SHOP NOW</a>
-    <a class="cta ghost" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener">THE HALLOWEEN DROP</a>
+    <a class="cta ghost" id="drop-btn" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener">THE HALLOWEEN DROP</a>
   </div>
+  <script>
+    /* Nov 1 (Eastern): Halloween button becomes the Christmas button (PLACEHOLDER copy) */
+    (function () {
+      var b = document.getElementById('drop-btn');
+      if (b && Date.now() >= Date.parse('2026-11-01T00:00:00-04:00')) {
+        b.href = 'https://shop.thirdeyegoliath.com/category/christmas';
+        b.textContent = 'THE CHRISTMAS DROP';
+      }
+    })();
+  </script>
 
   <div class="socials">
     <a class="soc" href="https://www.instagram.com/thirdeyegoliath/" target="_blank" rel="noopener">Instagram · @thirdeyegoliath</a>
@@ -269,7 +275,7 @@ footer .socials{margin-bottom:26px}
       <h2>WHY BUY FROM US</h2>
     </div>
     <div class="why reveal">
-      <p>Every design starts as original art — no templates, no clip art, no mass-produced blanks with a logo slapped on. Printed to order on soft, premium tees, hoodies, and tanks.</p>
+      <p>Every design is our own original art. Printed to order on soft, premium tees, hoodies, and tanks.</p>
     </div>
   </div>
 </section>
@@ -307,13 +313,24 @@ footer .socials{margin-bottom:26px}
         <div class="tdesc">Six goddesses, six moods. Dark divine feminine energy on soft tees, tanks, and hoodies.</div>
         <p>SHOP THE COLLECTION →</p>
       </a>
-      <a class="teaser t2 reveal" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+      <a class="teaser t2 reveal" id="drop-card" href="https://shop.thirdeyegoliath.com/category/halloween" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
         <div class="lock">🔓</div>
         <h3>THE HALLOWEEN DROP</h3>
         <div class="tdesc">Cosmic horror meets streetwear. Limited run, gone after the season.</div>
         <p>SHOP THE DROP →</p>
       </a>
+      <script>
+        /* Nov 1 (Eastern): Halloween card becomes the Christmas card (PLACEHOLDER copy) */
+        (function () {
+          var c = document.getElementById('drop-card');
+          if (!c || Date.now() < Date.parse('2026-11-01T00:00:00-04:00')) return;
+          c.href = 'https://shop.thirdeyegoliath.com/category/christmas';
+          c.classList.add('xmas');
+          c.querySelector('h3').textContent = 'THE CHRISTMAS DROP';
+          c.querySelector('.tdesc').textContent = 'Christmas just got otherworldly.';
+        })();
+      </script>
       <a class="teaser t3 reveal" href="https://shop.thirdeyegoliath.com/category/zombie-bro" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="blurbg"></div>
         <div class="lock">🔓</div>
